@@ -16,16 +16,22 @@ $SRC/button.js \
 $SRC/label.js \
 $SRC/panel.js \
 $SRC/canvas_app.js \
-> $OUT/temp.output.js
+> $OUT/temp.combined.js
 
 echo "Compressing JS files..."
 java -jar "$YUI" \
 --type js \
--o $OUT/canvas-ui.min.js \
-$OUT/temp.output.js
+-o $OUT/temp.minified.js \
+$OUT/temp.combined.js
+
+echo "Adding the version header..."
+cat \
+$SRC/version.js \
+$OUT/temp.minified.js \
+> $OUT/canvas-ui-0.0.0.min.js
 
 echo "Deleting temporary files..."
-rm -f $OUT/temp.output.js
+rm -f $OUT/temp.combined.js
+rm -f $OUT/temp.minified.js
 
 echo "Done!"
-# find . -iname "*.js" -exec cat "{}" \; > singlefile.js
