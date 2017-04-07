@@ -93,8 +93,8 @@ var canvas_app_prototype = {
     // Create the wrapper
     var rootElement = document.body;
     var wrapper = rootElement.createChild("div", {
-      "id": "app-wrapper",
-      "style": "padding: " + Config.Canvas.margin + "px"
+      "id": "app-wrapper"
+      /* "style": "padding: " + Config.Canvas.margin + "px" */
     })
 
     // Initialize the canvas and the context

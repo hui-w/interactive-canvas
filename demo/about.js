@@ -4,4 +4,4 @@ var about_prototype = {
   }
 }
 
-var About = CanvasApp.extend(about_prototype);
+var About = Component.extend(about_prototype);

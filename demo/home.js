@@ -4,4 +4,4 @@ var home_prototype = {
   }
 }
 
-var Home = CanvasApp.extend(home_prototype);
+var Home = Component.extend(home_prototype);
