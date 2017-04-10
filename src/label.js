@@ -9,7 +9,7 @@
 (function() {
   var prototype = {
     init: function(left, top, width, height, id) {
-
+      this._super(left, top, width, height, id);
     }
   };
 

@@ -17,8 +17,16 @@
   <script type="text/javascript">
     var wrapper = $('wrapper');
     var canvas = new Canvas(wrapper, 500, 300);
-    var panel = new Panel(0, 0, 100, 100);
+
+    // Panel
+    var panel = new Panel(20, 20, 100, 100);
+    panel.setFillStyle("RGBA(0, 0, 0, 0.1)");
     canvas.components.add(panel);
+
+    // Sub-Panel
+    var subPnl = new Panel(20, 20, 100, 100);
+    subPnl.setFillStyle("RGBA(0, 255, 0, 0.1)");
+    panel.components.add(subPnl);
   </script>
 </body>
 </html>

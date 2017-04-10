@@ -37,7 +37,12 @@
       this.onWillPaint = null;
       this.onDidPaint = null;
 
-      // Methods for initialization
+      // When component added
+      this.components.onAdd = function(component) {
+        component.onRequestPaint = this.requestPaint;
+      }.bind(this);
+
+      // Render the canvas when initialized
       this.render();
     },
 
@@ -60,6 +65,9 @@
       this.canvas.addEventListener("touchstart", this.handleTouch.bind(this), false);
       this.canvas.addEventListener("touchend", this.handleTouch.bind(this), false);
       this.canvas.addEventListener("touchmove", this.handleTouch.bind(this), false);
+
+      // Request to paint when renderred
+      this.requestPaint();
     },
 
     /*
@@ -99,11 +107,20 @@
     },
 
     paintComponents: function(context) {
-      this.components.forEach(function(component) {
+      this.components.filter(function(component) {
+        return component.isVisible;
+      }).forEach(function(component) {
         if (typeof component.paint === 'function') {
+          // Absolute position of top level components
+          component.absLeft = component.left;
+          component.absTop = component.top;
+          
+          context.save();
+          context.translate(component.left, component.top);
           component.paint(context);
+          context.restore();
         }
-      });
+      }.bind(this));
     },
 
     /*
