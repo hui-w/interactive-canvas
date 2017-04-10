@@ -12,10 +12,10 @@ echo "Combining JS files..."
 cat \
 $SRC/polyfill.js \
 $SRC/component.js \
-$SRC/button.js \
-$SRC/label.js \
 $SRC/panel.js \
-$SRC/canvas_app.js \
+$SRC/button.js \
+$SRC/canvas.js \
+$SRC/label.js \
 > $OUT/temp.combined.js
 
 echo "Compressing JS files..."

@@ -1,2 +1,2 @@
 # canvas-ui
-Javascript library for component-based HTML5 canvas
+Javascript library for component-based canvas with HTML5

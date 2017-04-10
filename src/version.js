@@ -1,1 +1,1 @@
-/* Canvas-UI 0.0.1 | https://github.com/hui-w/canvas-ui */
+/* Canvas-UI 0.1.1 | https://github.com/hui-w/canvas-ui */

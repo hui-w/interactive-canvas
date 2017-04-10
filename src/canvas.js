@@ -3,15 +3,15 @@
  * @repo https://github.com/hui-w/gomoku
  * @licence MIT
  *
- * Label
+ * Canvas
  */
 
 (function() {
   var prototype = {
-    init: function(left, top, width, height, id) {
+    init: function(wrapperID, width, height, isFullscreen) {
 
     }
   };
 
-  this.Label = Panel.extend(prototype);
+  this.Canvas = Class.extend(prototype);
 })();
