@@ -47,9 +47,11 @@
       this.components.filter(function(component) {
         return component.isVisible;
       }).forEach(function(component) {
+        // Calculate the absolute position before renderring the component
         component.absLeft = this.absLeft + component.left;
         component.absTop = this.absTop + component.top;
 
+        // Translate base on parent's translation
         context.save();
         context.translate(component.left, component.top);
         component.paint(context);
@@ -89,6 +91,7 @@
       });
     },
 
+    // Trigger the event to push the paint request into the queue
     requestPaint: function() {
       if (typeof this.onRequestPaint == 'function') {
         this.onRequestPaint();

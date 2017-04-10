@@ -114,7 +114,8 @@
           // Absolute position of top level components
           component.absLeft = component.left;
           component.absTop = component.top;
-          
+
+          // Translate and paint
           context.save();
           context.translate(component.left, component.top);
           component.paint(context);
