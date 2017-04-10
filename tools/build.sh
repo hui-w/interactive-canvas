@@ -10,7 +10,9 @@ mkdir $OUT
 
 echo "Combining JS files..."
 cat \
-$SRC/polyfill.js \
+$SRC/util/polyfill.js \
+$SRC/util/class.js \
+$SRC/util/list.js \
 $SRC/component.js \
 $SRC/panel.js \
 $SRC/button.js \
@@ -26,7 +28,7 @@ $OUT/temp.combined.js
 
 echo "Adding the version header..."
 cat \
-$SRC/version.js \
+./version.js \
 $OUT/temp.minified.js \
 > $OUT/canvas-ui-0.0.0.min.js
 

@@ -9,7 +9,11 @@
 (function() {
   var prototype = {
     init: function(left, top, width, height, id) {
-      console.log("a")
+      
+    },
+
+    handleEvent: function(eventType, left, top) {
+
     }
   };
 
