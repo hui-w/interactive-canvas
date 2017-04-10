@@ -22,8 +22,6 @@
     },
 
     paint: function(context) {
-      this._super(context);
-
       // Background
       if (this.fillStyle != null) {
         context.fillStyle = this.fillStyle;
@@ -36,6 +34,9 @@
         context.strokeStyle = this.strokeStyle;
         context.strokeRect(0, 0, this.width, this.height);
       }
+
+      // Call the method of base class to paint children
+      this._super(context);
     },
 
     setFillStyle: function(fillStyle) {

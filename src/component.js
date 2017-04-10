@@ -44,6 +44,7 @@
     },
 
     paint: function(context) {
+      // Paint the visible children
       this.components.filter(function(component) {
         return component.isVisible;
       }).forEach(function(component) {
