@@ -1,6 +1,6 @@
 /** 
  * @author Wang, Hui (huiwang@qlike.com) 
- * @repo https://github.com/hui-w/gomoku
+ * @repo https://github.com/hui-w/canvas-ui
  * @licence MIT
  *
  * Component
@@ -40,7 +40,7 @@
       this.isEnabled = true;
       this.isVisible = true;
       this.components = new List();
-      this.onRequestPaint = null;
+      this.onRequestPaint = new Callback();
     },
 
     paint: function(context) {
@@ -94,9 +94,7 @@
 
     // Trigger the event to push the paint request into the queue
     requestPaint: function() {
-      if (typeof this.onRequestPaint == 'function') {
-        this.onRequestPaint();
-      }
+      this.onRequestPaint.trigger();
     },
   };
 

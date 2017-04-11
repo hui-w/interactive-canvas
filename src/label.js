@@ -1,6 +1,6 @@
 /** 
  * @author Wang, Hui (huiwang@qlike.com) 
- * @repo https://github.com/hui-w/gomoku
+ * @repo https://github.com/hui-w/canvas-ui
  * @licence MIT
  *
  * Label

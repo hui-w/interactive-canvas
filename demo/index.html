@@ -3,8 +3,9 @@
 <head>
   <title>Canvas UI Demo</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <script type="text/javascript" src="../src/util/pollyfill.js"></script>
   <script type="text/javascript" src="../src/util/class.js"></script>
+  <script type="text/javascript" src="../src/util/pollyfill.js"></script>
+  <script type="text/javascript" src="../src/util/callback.js"></script>
   <script type="text/javascript" src="../src/util/list.js"></script>
   <script type="text/javascript" src="../src/component.js"></script>
   <script type="text/javascript" src="../src/panel.js"></script>
@@ -21,18 +22,26 @@
       console.log('Canvas Paint');
     };
 
-    // Panel
-    var rootPnl = new Panel(20, 20, 100, 100);
-    rootPnl.setFillStyle("RGBA(0, 255, 0, 1)");
-    rootPnl.setLineWidth(1);
-    rootPnl.setStrokeStyle("#ff0000");
-    canvas.components.add(rootPnl);
+    // Panel Red
+    var pnlRed = new Panel(5, 5, 40, 40);
+    pnlRed.setFillStyle("RGBA(255, 0, 0, 1)");
+    pnlRed.setLineWidth(1);
+    pnlRed.setStrokeStyle("#ff0000");
+    canvas.components.add(pnlRed);
 
-    // Sub-Panel
-    var subPnl = new Panel(20, 20, 100, 100);
-    subPnl.setFillStyle("RGBA(0, 0, 255, 1)");
-    subPnl.setLineWidth(1);
-    rootPnl.components.add(subPnl);
+    // Panel Green
+    var pnlGreen = new Panel(5, 5, 40, 40);
+    pnlGreen.setFillStyle("RGBA(0, 255, 0, 1)");
+    pnlGreen.setLineWidth(1);
+    pnlGreen.setStrokeStyle("#00ff00");
+    pnlRed.components.add(pnlGreen);
+
+    // Blue Green
+    var pnlBlue = new Panel(5, 5, 40, 40);
+    pnlBlue.setFillStyle("RGBA(0, 0, 255, 1)");
+    pnlBlue.setLineWidth(1);
+    pnlBlue.setStrokeStyle("#0000ff");
+    pnlGreen.components.add(pnlBlue);
   </script>
 </body>
 </html>

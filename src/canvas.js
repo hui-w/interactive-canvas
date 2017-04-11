@@ -1,6 +1,6 @@
 /** 
  * @author Wang, Hui (huiwang@qlike.com) 
- * @repo https://github.com/hui-w/gomoku
+ * @repo https://github.com/hui-w/canvas-ui
  * @licence MIT
  *
  * Canvas
@@ -38,9 +38,10 @@
       this.onDidPaint = null;
 
       // When component added
-      this.components.onAdd = function(component) {
-        component.onRequestPaint = this.requestPaint;
-      }.bind(this);
+      this.components.onAdd.add(function(args) {
+        var component = args[0];
+        component.onRequestPaint.add(this.requestPaint);
+      }.bind(this));
 
       // Render the canvas when initialized
       this.render();
@@ -49,7 +50,8 @@
     render: function() {
       this.canvas = this.wrapper.createChild("canvas", {
         "width": this.width,
-        "height": this.height
+        "height": this.height,
+        "style": "background-color: RGBA(240, 240, 240, 0.2);"
       });
       if (typeof G_vmlCanvasManager != "undefined") {
         this.canvas = G_vmlCanvasManager.initElement(this.canvas);

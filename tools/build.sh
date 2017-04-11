@@ -10,8 +10,9 @@ mkdir $OUT
 
 echo "Combining JS files..."
 cat \
-$SRC/util/polyfill.js \
 $SRC/util/class.js \
+$SRC/util/polyfill.js \
+$SRC/util/callback.js \
 $SRC/util/list.js \
 $SRC/component.js \
 $SRC/panel.js \

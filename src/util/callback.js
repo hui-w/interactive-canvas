@@ -3,32 +3,29 @@
  * @repo https://github.com/hui-w/canvas-ui
  * @licence MIT
  *
- * List
+ * Callback
  */
 
 (function() {
   var prototype = {
     items: null,
-    onAdd: null,
 
     init: function() {
       this.items = [];
-      this.onAdd = new Callback();
     },
 
     add: function(item) {
       this.items.push(item);
-      this.onAdd.trigger([item]);
     },
 
-    filter: function(fun) {
-      return this.items.filter(fun);
-    },
-
-    forEach: function(callback) {
-      this.items.forEach(callback);
+    trigger: function(args) {
+      this.items.filter(function(item) {
+        return typeof item === 'function';
+      }).forEach(function(item) {
+        item(args);
+      });
     }
   };
 
-  this.List = Class.extend(prototype);
+  this.Callback = Class.extend(prototype);
 })();
