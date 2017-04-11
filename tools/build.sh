@@ -12,7 +12,7 @@ echo "Combining JS files..."
 cat \
 $SRC/util/class.js \
 $SRC/util/polyfill.js \
-$SRC/util/callback.js \
+$SRC/util/event-handler.js \
 $SRC/util/list.js \
 $SRC/component.js \
 $SRC/panel.js \

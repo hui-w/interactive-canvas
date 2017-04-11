@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <script type="text/javascript" src="../src/util/class.js"></script>
   <script type="text/javascript" src="../src/util/pollyfill.js"></script>
-  <script type="text/javascript" src="../src/util/callback.js"></script>
+  <script type="text/javascript" src="../src/util/event-handler.js"></script>
   <script type="text/javascript" src="../src/util/list.js"></script>
   <script type="text/javascript" src="../src/component.js"></script>
   <script type="text/javascript" src="../src/panel.js"></script>
@@ -18,26 +18,26 @@
   <script type="text/javascript">
     var wrapper = $('wrapper');
     var canvas = new Canvas(wrapper, 500, 300);
-    canvas.onDidPaint = function(context) {
+    canvas.onDidPaint.add(function(context) {
       console.log('Canvas Paint');
-    };
+    });
 
     // Panel Red
-    var pnlRed = new Panel(5, 5, 40, 40);
+    var pnlRed = new Panel(20, 20, 40, 40);
     pnlRed.setFillStyle("RGBA(255, 0, 0, 1)");
     pnlRed.setLineWidth(1);
     pnlRed.setStrokeStyle("#ff0000");
     canvas.components.add(pnlRed);
 
     // Panel Green
-    var pnlGreen = new Panel(5, 5, 40, 40);
+    var pnlGreen = new Panel(20, 20, 40, 40);
     pnlGreen.setFillStyle("RGBA(0, 255, 0, 1)");
     pnlGreen.setLineWidth(1);
     pnlGreen.setStrokeStyle("#00ff00");
     pnlRed.components.add(pnlGreen);
 
     // Blue Green
-    var pnlBlue = new Panel(5, 5, 40, 40);
+    var pnlBlue = new Panel(20, 20, 40, 40);
     pnlBlue.setFillStyle("RGBA(0, 0, 255, 1)");
     pnlBlue.setLineWidth(1);
     pnlBlue.setStrokeStyle("#0000ff");

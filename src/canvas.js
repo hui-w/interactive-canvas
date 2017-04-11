@@ -33,13 +33,12 @@
       this.delayTimer = null;
 
       // Init the event handlers
-      this.onResized = null;
-      this.onWillPaint = null;
-      this.onDidPaint = null;
+      this.onResized = new EventHandler();
+      this.onWillPaint = new EventHandler();
+      this.onDidPaint = new EventHandler();
 
       // When component added
-      this.components.onAdd.add(function(args) {
-        var component = args[0];
+      this.components.onAdd.add(function(component) {
         component.onRequestPaint.add(this.requestPaint);
       }.bind(this));
 
@@ -95,17 +94,13 @@
       this.canvas.height = this.canvas.height;
 
       // Before painting components
-      if (typeof this.onWillPaint === 'function') {
-        this.onWillPaint(this.context);
-      }
+      this.onWillPaint.trigger(this.context);
 
       // Paint all managed components
       this.paintComponents(this.context);
 
       // After painting components
-      if (typeof this.onDidPaint === 'function') {
-        this.onDidPaint(this.context);
-      }
+      this.onDidPaint.trigger(this.context);
     },
 
     paintComponents: function(context) {

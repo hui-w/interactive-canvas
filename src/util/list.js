@@ -13,12 +13,12 @@
 
     init: function() {
       this.items = [];
-      this.onAdd = new Callback();
+      this.onAdd = new EventHandler();
     },
 
     add: function(item) {
       this.items.push(item);
-      this.onAdd.trigger([item]);
+      this.onAdd.trigger(item);
     },
 
     filter: function(fun) {

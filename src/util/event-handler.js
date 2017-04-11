@@ -3,7 +3,7 @@
  * @repo https://github.com/hui-w/canvas-ui
  * @licence MIT
  *
- * Callback
+ * EventHandler
  */
 
 (function() {
@@ -18,14 +18,15 @@
       this.items.push(item);
     },
 
-    trigger: function(args) {
+    trigger: function() {
+      var args = arguments;
       this.items.filter(function(item) {
         return typeof item === 'function';
       }).forEach(function(item) {
-        item(args);
+        item.apply(this, args);
       });
     }
   };
 
-  this.Callback = Class.extend(prototype);
+  this.EventHandler = Class.extend(prototype);
 })();

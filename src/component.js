@@ -40,7 +40,7 @@
       this.isEnabled = true;
       this.isVisible = true;
       this.components = new List();
-      this.onRequestPaint = new Callback();
+      this.onRequestPaint = new EventHandler();
     },
 
     paint: function(context) {
