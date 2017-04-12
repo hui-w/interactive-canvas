@@ -105,20 +105,11 @@
 
     paintComponents: function(context) {
       this.components.filter(function(component) {
-        return component.isVisible;
+        return component.isVisible &&
+          typeof component.paint === 'function';
       }).forEach(function(component) {
-        if (typeof component.paint === 'function') {
-          // Absolute position of top level components
-          component.absLeft = component.left;
-          component.absTop = component.top;
-
-          // Translate and paint
-          context.save();
-          context.translate(component.left, component.top);
-          component.paint(context);
-          context.restore();
-        }
-      }.bind(this));
+        component.paint(context);
+      });
     },
 
     /*

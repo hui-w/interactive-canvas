@@ -22,6 +22,9 @@
     },
 
     paint: function(context) {
+      // Prepare to paint
+      this.componentWillPaint(context);
+
       // Background
       if (this.fillStyle != null) {
         context.fillStyle = this.fillStyle;
@@ -35,8 +38,8 @@
         context.strokeRect(0, 0, this.width, this.height);
       }
 
-      // Call the method of base class to paint children
-      this._super(context);
+      // Paint completed
+      this.componentDidPaint(context);
     },
 
     setFillStyle: function(fillStyle) {
