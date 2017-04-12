@@ -39,7 +39,7 @@
 
       // When component added
       this.components.onAdd.add(function(component) {
-        component.onRequestPaint.add(this.requestPaint);
+        component.onRequestPaint.add(this.requestPaint.bind(this));
       }.bind(this));
 
       // Render the canvas when initialized

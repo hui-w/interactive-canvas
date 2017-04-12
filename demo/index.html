@@ -15,50 +15,6 @@
 </head>
 <body style="padding: 0px; margin: 0px; overflow: hidden;">
   <div id="wrapper" />
-  <script type="text/javascript">
-    var wrapper = $('wrapper');
-    var canvas = new Canvas(wrapper, 500, 300);
-    canvas.onDidPaint.add(function(context) {
-      console.log('Canvas Paint');
-    });
-
-    // Panel Red
-    var pnlRed = new Panel(20, 20, 40, 40);
-    pnlRed.setFillStyle("RGBA(243, 83, 37, 1)");
-    canvas.components.add(pnlRed);
-
-    pnlRed.onCapture.add(function(left, top){
-      console.log('Red Panel Captured', left, top);
-    });
-
-    // Panel Green
-    var pnlGreen = new Panel(20, 20, 40, 40);
-    pnlGreen.setFillStyle("RGBA(129, 188, 6, 1)");
-    pnlRed.components.add(pnlGreen);
-
-    pnlGreen.onCapture.add(function(left, top){
-      console.log('Green Panel Captured', left, top);
-    });
-
-    // Blue Green
-    var pnlBlue = new Panel(20, 20, 40, 40);
-    pnlBlue.setFillStyle("RGBA(5, 166, 240, 1)");
-    pnlGreen.components.add(pnlBlue);
-
-    pnlBlue.onCapture.add(function(left, top){
-      console.log('Blue Panel Captured', left, top);
-    });
-
-    // Orange Green
-    var pnlOrange = new Panel(20, 120, 40, 40);
-    pnlOrange.setFillStyle("RGBA(255, 186, 8, 1)");
-    pnlOrange.setLineWidth(1);
-    pnlOrange.setStrokeStyle("#000");
-    canvas.components.add(pnlOrange);
-
-    pnlOrange.onCapture.add(function(left, top){
-      console.log('Orange Panel Captured', left, top);
-    });
-  </script>
+  <script type="text/javascript" src="./demo.js"></script>
 </body>
 </html>

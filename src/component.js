@@ -50,6 +50,14 @@
       this.onCapture = new EventHandler();
       this.onDrag = new EventHandler();
       this.onRelease = new EventHandler();
+
+      // When component added
+      this.components.onAdd.add(function(component) {
+        component.onRequestPaint.add(function() {
+          // Invoke the request paint chain
+          this.onRequestPaint.trigger();
+        }.bind(this));
+      }.bind(this));
     },
 
     // Invoked in the callback of WillPaint
