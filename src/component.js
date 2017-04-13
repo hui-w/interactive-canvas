@@ -71,7 +71,7 @@
     },
 
     // Invoked in the callback of WillPaint
-    componentWillPaint: function(context) {
+    saveContext: function(context) {
       if (!this.absLeft || !this.absTop) {
         // Absolute left and top are usually caculated by parent component
         // This case is for the root controls
@@ -85,7 +85,7 @@
     },
 
     // Invoked in the callback of DidPaint
-    componentDidPaint: function(context) {
+    restoreContext: function(context) {
       // Restore the context
       context.restore();
 

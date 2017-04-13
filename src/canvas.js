@@ -92,7 +92,7 @@
       this.canvas.height = this.canvas.height;
 
       // Prepare to paint
-      this.componentWillPaint(context);
+      this.saveContext(context);
 
       // Paint the canvas
       // Background
@@ -109,7 +109,9 @@
       }
 
       // Paint completed
-      this.componentDidPaint(context);
+      this.restoreContext(context);
+
+      console.log('Canvas Paint');
     },
 
     /*

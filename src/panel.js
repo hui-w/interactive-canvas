@@ -8,9 +8,16 @@
 
 (function() {
   var prototype = {
-    paint: function(context) {
+    /* "purePaint": 
+        When child class invoke this as "this._super()",
+        do set pure as "true".
+        Then the context save/restore and translation will be ignored.
+        */
+    paint: function(context, purePaint) {
       // Prepare to paint
-      this.componentWillPaint(context);
+      if (!purePaint) {
+        this.saveContext(context);
+      }
 
       // Background
       if (this.fillStyle != null) {
@@ -26,7 +33,9 @@
       }
 
       // Paint completed
-      this.componentDidPaint(context);
+      if (!purePaint) {
+        this.restoreContext(context);
+      }
     },
   };
 

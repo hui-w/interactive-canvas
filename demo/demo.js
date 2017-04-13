@@ -8,10 +8,14 @@
   canvas.setFillStyle('#F2F2F2');
   // canvas.setLineWidth(1);
   // canvas.setStrokeStyle('#f00');
-  canvas.onDidPaint.add(function(context) {
-    // Always show the log when it redraws
-    console.log('Canvas Paint');
-  });
+
+  // Render the title
+  var label = new Label(80, 20, "Component Based HTML5 Canvas");
+  label.setFillStyle('#5FBA7D');
+  label.setLineWidth(2);
+  label.setStrokeStyle('#5FBA7D');
+  label.setFontColor('#fff');
+  canvas.controls.add(label);
 
   // Render the target panel (with orange color)
   var pnlTarget = new Panel(20, 120, 40, 40);
