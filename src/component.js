@@ -17,7 +17,12 @@
 
     isEnabled: null,
     isVisible: null,
-    components: null,
+    controls: null,
+
+    // Look and feel
+    fillStyle: null,
+    strokeStyle: null,
+    lineWidth: null,
 
     // Absolute position of the component
     // This will be caculated when renderring
@@ -45,14 +50,19 @@
 
       this.isEnabled = true;
       this.isVisible = true;
-      this.components = new List();
+      this.controls = new List();
+
+      this.fillStyle = null;
+      this.strokeStyle = '#000';
+      this.lineWidth = 0;
+
       this.onRequestPaint = new EventHandler();
       this.onCapture = new EventHandler();
       this.onDrag = new EventHandler();
       this.onRelease = new EventHandler();
 
       // When component added
-      this.components.onAdd.add(function(component) {
+      this.controls.onAdd.add(function(component) {
         component.onRequestPaint.add(function() {
           // Invoke the request paint chain
           this.onRequestPaint.trigger();
@@ -64,12 +74,14 @@
     componentWillPaint: function(context) {
       if (!this.absLeft || !this.absTop) {
         // Absolute left and top are usually caculated by parent component
-        // This case is for the root components on canvas
+        // This case is for the root controls
         this.absLeft = this.left;
         this.absTop = this.top;
       }
       context.save();
-      context.translate(this.absLeft, this.absTop);
+      if (this.absLeft !== 0 && this.absTop !== 0) {
+        context.translate(this.absLeft, this.absTop);
+      }
     },
 
     // Invoked in the callback of DidPaint
@@ -78,7 +90,7 @@
       context.restore();
 
       // Paint the visible children
-      this.components.filter(function(component) {
+      this.controls.filter(function(component) {
         return component.isVisible &&
           typeof component.paint === 'function';
       }).forEach(function(component) {
@@ -119,7 +131,7 @@
       }
 
       // Propagate to children
-      this.components.forEach(function(component) {
+      this.controls.forEach(function(component) {
         if (typeof component.handleEvent === 'function') {
           component.handleEvent(eventType, left, top);
         }
@@ -135,7 +147,7 @@
       this.requestPaint();
 
       // Update children
-      this.components.forEach(function(component) {
+      this.controls.forEach(function(component) {
         component.setEnabled(isEnabled);
       });
     },
@@ -149,15 +161,42 @@
       this.requestPaint();
 
       // Update children
-      this.components.forEach(function(component) {
+      this.controls.forEach(function(component) {
         component.setVisible(isVisible);
       });
+    },
+
+    setFillStyle: function(fillStyle) {
+      if (this.fillStyle === fillStyle) {
+        return;
+      }
+
+      this.fillStyle = fillStyle;
+      this.requestPaint();
+    },
+
+    setStrokeStyle: function(strokeStyle) {
+      if (this.strokeStyle === strokeStyle) {
+        return;
+      }
+
+      this.strokeStyle = strokeStyle;
+      this.requestPaint();
+    },
+
+    setLineWidth: function(lineWidth) {
+      if (this.lineWidth === lineWidth) {
+        return;
+      }
+
+      this.lineWidth = lineWidth;
+      this.requestPaint();
     },
 
     // Trigger the event to push the paint request into the queue
     requestPaint: function() {
       this.onRequestPaint.trigger();
-    },
+    }
   };
 
   this.Component = Class.extend(prototype);

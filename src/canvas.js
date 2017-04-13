@@ -14,7 +14,6 @@
     isFullscreen: null,
     canvas: null,
     context: null,
-    components: null,
     delayTimer: null,
 
     // Event handlers
@@ -23,13 +22,12 @@
     onDidPaint: null,
 
     init: function(wrapper, width, height, isFullscreen) {
+      this._super(0, 0, width, height);
+
       // Init the members
       this.wrapper = wrapper;
-      this.width = width;
-      this.height = height;
       this.isFullscreen = isFullscreen;
       this.canvas = null;
-      this.components = new List();
       this.delayTimer = null;
 
       // Init the event handlers
@@ -37,9 +35,10 @@
       this.onWillPaint = new EventHandler();
       this.onDidPaint = new EventHandler();
 
-      // When component added
-      this.components.onAdd.add(function(component) {
-        component.onRequestPaint.add(this.requestPaint.bind(this));
+      // Handle the painting request from children
+      this.onRequestPaint.add(function() {
+        // When painting is requested by children
+        this.requestPaint();
       }.bind(this));
 
       // Render the canvas when initialized
@@ -47,25 +46,24 @@
     },
 
     render: function() {
-      this.canvas = this.wrapper.createChild("canvas", {
-        "width": this.width,
-        "height": this.height,
-        "style": "background-color: RGBA(240, 240, 240, 0.2);"
+      this.canvas = this.wrapper.createChild('canvas', {
+        'width': this.width,
+        'height': this.height
       });
-      if (typeof G_vmlCanvasManager != "undefined") {
+      if (typeof G_vmlCanvasManager != 'undefined') {
         this.canvas = G_vmlCanvasManager.initElement(this.canvas);
       }
-      this.context = this.canvas.getContext("2d");
+      this.context = this.canvas.getContext('2d');
 
       // Handle the mouse events
-      this.canvas.addEventListener("mousedown", this.handleMouse.bind(this), false);
-      this.canvas.addEventListener("mousemove", this.handleMouse.bind(this), false);
-      this.canvas.addEventListener("mouseup", this.handleMouse.bind(this), false);
+      this.canvas.addEventListener('mousedown', this.handleMouse.bind(this), false);
+      this.canvas.addEventListener('mousemove', this.handleMouse.bind(this), false);
+      this.canvas.addEventListener('mouseup', this.handleMouse.bind(this), false);
 
       // Handle the touch events
-      this.canvas.addEventListener("touchstart", this.handleTouch.bind(this), false);
-      this.canvas.addEventListener("touchend", this.handleTouch.bind(this), false);
-      this.canvas.addEventListener("touchmove", this.handleTouch.bind(this), false);
+      this.canvas.addEventListener('touchstart', this.handleTouch.bind(this), false);
+      this.canvas.addEventListener('touchend', this.handleTouch.bind(this), false);
+      this.canvas.addEventListener('touchmove', this.handleTouch.bind(this), false);
 
       // Request to paint when renderred
       this.requestPaint();
@@ -83,33 +81,35 @@
       }
 
       this.delayTimer = setTimeout(function() {
-        this.paint();
+        this.paint(this.context);
         this.delayTimer = null;
       }.bind(this), 50);
     },
 
-    paint: function() {
+    paint: function(context) {
       // Clear the canvas
       this.canvas.width = this.canvas.width;
       this.canvas.height = this.canvas.height;
 
-      // Before painting components
-      this.onWillPaint.trigger(this.context);
+      // Prepare to paint
+      this.componentWillPaint(context);
 
-      // Paint all managed components
-      this.paintComponents(this.context);
+      // Paint the canvas
+      // Background
+      if (this.fillStyle != null) {
+        context.fillStyle = this.fillStyle;
+        context.fillRect(0, 0, this.width, this.height);
+      }
 
-      // After painting components
-      this.onDidPaint.trigger(this.context);
-    },
+      // Border
+      if (this.strokeStyle && this.lineWidth > 0) {
+        context.lineWidth = this.lineWidth;
+        context.strokeStyle = this.strokeStyle;
+        context.strokeRect(0, 0, this.width, this.height);
+      }
 
-    paintComponents: function(context) {
-      this.components.filter(function(component) {
-        return component.isVisible &&
-          typeof component.paint === 'function';
-      }).forEach(function(component) {
-        component.paint(context);
-      });
+      // Paint completed
+      this.componentDidPaint(context);
     },
 
     /*
@@ -119,13 +119,13 @@
     // Mouse events
     handleMouse: function(e) {
       switch (e.type) {
-        case "mousedown":
+        case 'mousedown':
           this.capture(e);
           break;
-        case "mousemove":
+        case 'mousemove':
           this.drag(e);
           break;
-        case "mouseup":
+        case 'mouseup':
           this.release(e);
           break;
       }
@@ -135,17 +135,17 @@
     handleTouch: function(e) {
       e.preventDefault();
       switch (e.type) {
-        case "touchstart":
+        case 'touchstart':
           if (e.touches.length == 1) {
             this.capture(e.targetTouches[0]);
           } else if (e.touches.length == 2) {}
           break;
-        case "touchend":
+        case 'touchend':
           if (e.changedTouches.length == 1) {
             this.release(e.changedTouches[0]);
           }
           break;
-        case "touchmove":
+        case 'touchmove':
           if (e.changedTouches.length == 1) {
             this.drag(e.changedTouches[0]);
           } else if (e.touches.length == 2) {}
@@ -178,7 +178,7 @@
 
     // Dispatch the event to children
     dispatchEvent: function(eventType, left, top) {
-      this.components.forEach(function(component) {
+      this.controls.forEach(function(component) {
         if (typeof component.handleEvent === 'function') {
           component.handleEvent(eventType, left, top);
         }
@@ -186,5 +186,5 @@
     }
   };
 
-  this.Canvas = Class.extend(prototype);
+  this.Canvas = Component.extend(prototype);
 })();

@@ -8,19 +8,6 @@
 
 (function() {
   var prototype = {
-    // Look and feel
-    fillStyle: null,
-    strokeStyle: null,
-    lineWidth: null,
-
-    init: function(left, top, width, height, id) {
-      this._super(left, top, width, height, id);
-
-      this.fillStyle = null;
-      this.strokeStyle = "#000";
-      this.lineWidth = 0;
-    },
-
     paint: function(context) {
       // Prepare to paint
       this.componentWillPaint(context);
@@ -41,33 +28,6 @@
       // Paint completed
       this.componentDidPaint(context);
     },
-
-    setFillStyle: function(fillStyle) {
-      if (this.fillStyle === fillStyle) {
-        return;
-      }
-
-      this.fillStyle = fillStyle;
-      this.requestPaint();
-    },
-
-    setStrokeStyle: function(strokeStyle) {
-      if (this.strokeStyle === strokeStyle) {
-        return;
-      }
-
-      this.strokeStyle = strokeStyle;
-      this.requestPaint();
-    },
-
-    setLineWidth: function(lineWidth) {
-      if (this.lineWidth === lineWidth) {
-        return;
-      }
-
-      this.lineWidth = lineWidth;
-      this.requestPaint();
-    }
   };
 
   this.Panel = Component.extend(prototype);
