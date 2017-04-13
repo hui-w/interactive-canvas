@@ -58,7 +58,7 @@
       console.log('Captured Panel', this.id, 'on[', left, top, ']');
 
       // Copy its background color to the target
-      pnlTarget.setFillStyle(this.fillStyle);
+      pnlTarget.setFillStyle(this.getProp('fillStyle'));
 
       // Highlight self by border
       this.setLineWidth(1);

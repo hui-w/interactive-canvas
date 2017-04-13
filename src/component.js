@@ -15,14 +15,9 @@
     height: null,
     id: null,
 
-    isEnabled: null,
-    isVisible: null,
+    // Properties with getter and setter
+    properties: null,
     controls: null,
-
-    // Look and feel
-    fillStyle: null,
-    strokeStyle: null,
-    lineWidth: null,
 
     // Absolute position of the component
     // This will be caculated when renderring
@@ -44,17 +39,18 @@
       this.height = height;
       this.id = id;
 
+      this.properties = {
+        isEnabled: true,
+        isVisible: true,
+        fillStyle: null,
+        strokeStyle: '#000',
+        lineWidth: 0
+      };
+      this.controls = new List();
+
       // Initial value of absolute position
       this.absLeft = null;
       this.absTop = null;
-
-      this.isEnabled = true;
-      this.isVisible = true;
-      this.controls = new List();
-
-      this.fillStyle = null;
-      this.strokeStyle = '#000';
-      this.lineWidth = 0;
 
       this.onRequestPaint = new EventHandler();
       this.onCapture = new EventHandler();
@@ -68,6 +64,30 @@
           this.onRequestPaint.trigger();
         }.bind(this));
       }.bind(this));
+    },
+
+    // Get the value of the property
+    setProp: function(key, value, propagate) {
+      if (this.properties[key] === value) {
+        return false;
+      }
+
+      // Update the value and request to paint
+      this.properties[key] = value;
+
+      // Update children
+      if (propagate) {
+        this.controls.forEach(function(component) {
+          component.setProp(key, value, propagate);
+        });
+      }
+
+      return true;
+    },
+
+    // Set the value of the property
+    getProp: function(key) {
+      return this.properties[key];
     },
 
     // Invoked in the callback of WillPaint
@@ -91,7 +111,7 @@
 
       // Paint the visible children
       this.controls.filter(function(component) {
-        return component.isVisible &&
+        return component.getProp('isVisible') &&
           typeof component.paint === 'function';
       }).forEach(function(component) {
         // Calculate the absolute position before renderring the component
@@ -111,7 +131,7 @@
     },
 
     handleEvent: function(eventType, left, top) {
-      if (!this.isEnabled || !this.isVisible) {
+      if (!this.getProp('isEnabled') || !this.getProp('isVisible')) {
         // The component is disabled of hidden
         return;
       }
@@ -139,58 +159,33 @@
     },
 
     setEnabled: function(isEnabled) {
-      if (this.isEnabled === isEnabled) {
-        return;
+      if (this.setProp('isEnabled', isEnabled, true)) {
+        this.requestPaint();
       }
-
-      this.isEnabled = isEnabled;
-      this.requestPaint();
-
-      // Update children
-      this.controls.forEach(function(component) {
-        component.setEnabled(isEnabled);
-      });
     },
 
     setVisible: function(isVisible) {
-      if (this.isVisible === isVisible) {
-        return;
+      if (this.setProp('isVisible', isVisible, true)) {
+        this.requestPaint();
       }
-
-      this.isVisible = isVisible;
-      this.requestPaint();
-
-      // Update children
-      this.controls.forEach(function(component) {
-        component.setVisible(isVisible);
-      });
     },
 
     setFillStyle: function(fillStyle) {
-      if (this.fillStyle === fillStyle) {
-        return;
+      if (this.setProp('fillStyle', fillStyle)) {
+        this.requestPaint();
       }
-
-      this.fillStyle = fillStyle;
-      this.requestPaint();
     },
 
     setStrokeStyle: function(strokeStyle) {
-      if (this.strokeStyle === strokeStyle) {
-        return;
+      if (this.setProp('strokeStyle', strokeStyle)) {
+        this.requestPaint();
       }
-
-      this.strokeStyle = strokeStyle;
-      this.requestPaint();
     },
 
     setLineWidth: function(lineWidth) {
-      if (this.lineWidth === lineWidth) {
-        return;
+      if (this.setProp('lineWidth', lineWidth)) {
+        this.requestPaint();
       }
-
-      this.lineWidth = lineWidth;
-      this.requestPaint();
     },
 
     // Trigger the event to push the paint request into the queue

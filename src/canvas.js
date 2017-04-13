@@ -9,8 +9,6 @@
 (function() {
   var prototype = {
     wrapper: null,
-    width: null,
-    height: null,
     isFullscreen: null,
     canvas: null,
     context: null,
@@ -96,15 +94,15 @@
 
       // Paint the canvas
       // Background
-      if (this.fillStyle != null) {
-        context.fillStyle = this.fillStyle;
+      if (this.getProp('fillStyle')) {
+        context.fillStyle = this.getProp('fillStyle');
         context.fillRect(0, 0, this.width, this.height);
       }
 
       // Border
-      if (this.strokeStyle && this.lineWidth > 0) {
-        context.lineWidth = this.lineWidth;
-        context.strokeStyle = this.strokeStyle;
+      if (this.getProp('strokeStyle') && this.getProp('lineWidth') > 0) {
+        context.lineWidth = this.getProp('lineWidth');
+        context.strokeStyle = this.getProp('strokeStyle');
         context.strokeRect(0, 0, this.width, this.height);
       }
 

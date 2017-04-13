@@ -8,75 +8,57 @@
 
 (function() {
   var prototype = {
-    font: null,
-    text: null,
-    horizontalAlign: null,
-    verticalAlign: null,
-
     init: function(left, top, text, id) {
       this._super(left, top, 0, 0, id);
 
-      this.font = {
-        size: 12,
-        face: 'Arial, Helvetica, sans-serif',
-        color: '#000000'
+      // Extend properties
+      var newProperties = {
+        fontSize: 12,
+        fontFace: 'Arial, Helvetica, sans-serif',
+        fontColor: '#000000',
+        text: text,
+        horizontalAlign: 'left',
+        verticalAlign: 'top'
       };
 
-      this.text = text;
-      this.horizontalAlign = 'left';
-      this.verticalAlign = 'top';
+      this.properties = Object.assign({}, this.properties, newProperties);
     },
 
     setHorizontalAlign: function(horizontalAlign) {
-      if (horizontalAlign === this.horizontalAlign) {
-        return;
+      if (this.setProp('horizontalAlign', horizontalAlign)) {
+        this.requestPaint();
       }
-
-      this.horizontalAlign = horizontalAlign;
-      this.requestPaint();
     },
 
     setVerticalAlign: function(verticalAlign) {
-      if (verticalAlign === this.verticalAlign) {
-        return;
+      if (this.setProp('verticalAlign', verticalAlign)) {
+        this.requestPaint();
       }
-
-      this.verticalAlign = verticalAlign;
-      this.requestPaint();
     },
 
     setText: function(text) {
-      if (text === this.text) {
-        return;
+      if (this.setProp('text', text)) {
+        this.requestPaint();
       }
-
-      this.text = text;
-      this.requestPaint();
     },
 
     setFontColor: function(fontColor) {
-      if (fontColor === this.font.color) {
-        return;
+      if (this.setProp('fontColor', fontColor)) {
+        this.requestPaint();
       }
-
-      this.font.color = fontColor;
-      this.requestPaint();
     },
 
     setFontSize: function(fontSize) {
-      if (fontSize === this.font.size) {
-        return;
+      if (this.setProp('fontSize', fontSize)) {
+        this.requestPaint();
       }
-
-      this.font.size = fontSize;
-      this.requestPaint();
     },
 
     // Set the font and get the size
     updateSize: function(context) {
-      context.font = this.font.size + 'px ' + this.font.face;
-      this.width = context.measureText(this.text).width;
-      this.height = this.font.size;
+      context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');
+      this.width = context.measureText(this.getProp('text')).width;
+      this.height = this.getProp('fontSize');
     },
 
     paint: function(context) {
@@ -90,8 +72,11 @@
       this._super(context, true);
 
       // Set the font color and render the text
-      context.fillStyle = this.font.color;
-      context.fillTextEx(this.text, 0, 0, this.horizontalAlign, this.verticalAlign);
+      context.fillStyle = this.getProp('fontColor');
+      context.fillTextEx(this.getProp('text'), 0, 0,
+        this.getProp('horizontalAlign'),
+        this.getProp('verticalAlign')
+      );
 
       // Paint completed
       this.restoreContext(context);
