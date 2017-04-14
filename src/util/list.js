@@ -6,6 +6,8 @@
  * List
  */
 
+'use strict';
+
 (function() {
   var prototype = {
     items: null,
@@ -30,5 +32,5 @@
     }
   };
 
-  this.List = Class.extend(prototype);
+  window.List = Class.extend(prototype);
 })();

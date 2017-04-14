@@ -6,6 +6,8 @@
  * Button
  */
 
+'use strict';
+
 (function() {
   var prototype = {
     init: function(left, top, width, height, id) {
@@ -13,5 +15,5 @@
     }
   };
 
-  this.Button = Panel.extend(prototype);
+  window.Button = Panel.extend(prototype);
 })();

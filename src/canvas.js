@@ -6,6 +6,8 @@
  * Canvas
  */
 
+'use strict';
+
 (function() {
   var prototype = {
     wrapper: null,
@@ -186,5 +188,5 @@
     }
   };
 
-  this.Canvas = Component.extend(prototype);
+  window.Canvas = Component.extend(prototype);
 })();

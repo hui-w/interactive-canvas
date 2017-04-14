@@ -6,6 +6,8 @@
  * Panel
  */
 
+'use strict';
+
 (function() {
   var prototype = {
     /* "purePaint": 
@@ -39,5 +41,5 @@
     },
   };
 
-  this.Panel = Component.extend(prototype);
+  window.Panel = Component.extend(prototype);
 })();

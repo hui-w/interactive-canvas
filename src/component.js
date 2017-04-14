@@ -7,6 +7,8 @@
  * Does't implement "Paint()" method
  */
 
+'use strict';
+
 (function() {
   var prototype = {
     left: null,
@@ -194,5 +196,5 @@
     }
   };
 
-  this.Component = Class.extend(prototype);
+  window.Component = Class.extend(prototype);
 })();

@@ -6,6 +6,8 @@
  * Label
  */
 
+'use strict';
+
 (function() {
   var prototype = {
     init: function(left, top, text, id) {
@@ -83,5 +85,5 @@
     }
   };
 
-  this.Label = Panel.extend(prototype);
+  window.Label = Panel.extend(prototype);
 })();

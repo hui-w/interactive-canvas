@@ -6,6 +6,8 @@
  * EventHandler
  */
 
+'use strict';
+
 (function() {
   var prototype = {
     items: null,
@@ -28,5 +30,5 @@
     }
   };
 
-  this.EventHandler = Class.extend(prototype);
+  window.EventHandler = Class.extend(prototype);
 })();

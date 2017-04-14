@@ -4,8 +4,10 @@
  * @licence MIT
  */
 
-if (typeof $ !== 'function') {
-  function $() {
+'use strict';
+
+if (typeof window.$ !== 'function') {
+  window.$ = function() {
     var elements = new Array();
     for (var i = 0; i < arguments.length; i++) {
       var element = arguments[i];
@@ -24,7 +26,7 @@ if (!Element.prototype.createChild) {
     var element = document.createElement(tag);
     this.appendChild(element);
     if (param) {
-      for (key in param) {
+      for (var key in param) {
         element.setAttribute(key, param[key]);
       }
     }

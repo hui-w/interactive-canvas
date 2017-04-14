@@ -1,0 +1,10 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+section {
+  margin: 10px;
+  padding: 10px;
+}
