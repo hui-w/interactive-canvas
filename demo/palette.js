@@ -73,7 +73,6 @@
         this.targetPanel.setFillStyle('#FFF');
 
         // Restore borders of color panels
-        console.log(this.panels)
         this.panels.forEach(function(panel) {
           panel.setLineWidth(0);
         });
