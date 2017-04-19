@@ -67,7 +67,8 @@
 
       // Register the event
       this.targetPanel.onCapture.add(function(left, top) {
-        console.log('Target Panel Captured on [', left, top, ']');
+        // Output the log
+        this.label.setText(['Target Panel Captured on [', left, top, ']'].join(' '));
 
         // Restore the background
         this.targetPanel.setFillStyle('#FFF');
@@ -89,7 +90,17 @@
 
         // Register the event
         panel.onRelease.add(function(left, top) {
-          console.log('Captured Panel', panel.id, 'on[', left, top, ']');
+          // Output the log
+          this.label.setText(
+            ['Captured Panel',
+              panel.id,
+              'on [',
+              left, top,
+              ']',
+              '; Color code:',
+              panel.getProp('fillStyle')
+            ].join(' ')
+          );
 
           // Copy its background color to the target
           this.targetPanel.setFillStyle(panel.getProp('fillStyle'));
