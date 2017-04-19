@@ -10,8 +10,8 @@
 
 (function() {
   var prototype = {
-    init: function(left, top, width, height, text, id) {
-      this._super(left, top, width, height, id);
+    init: function(left, top, text, id) {
+      this._super(left, top, 0, 0, id);
 
       // Extend properties
       var newProperties = {

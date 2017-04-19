@@ -15,5 +15,5 @@
     }
   };
 
-  window.Button = Label.extend(prototype);
+  window.Button = Panel.extend(prototype);
 })();
