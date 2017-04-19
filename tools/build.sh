@@ -16,9 +16,9 @@ $SRC/util/event-handler.js \
 $SRC/util/list.js \
 $SRC/component.js \
 $SRC/panel.js \
+$SRC/label.js \
 $SRC/button.js \
 $SRC/canvas.js \
-$SRC/label.js \
 > $OUT/temp.combined.js
 
 echo "Compressing JS files..."
