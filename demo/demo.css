@@ -12,3 +12,8 @@ section {
     margin: 10px;
     padding: 10px;
 }
+
+.code {
+  background-color: #EEE;
+  padding: 8px 0px;
+}

@@ -12,9 +12,9 @@
     <script type="text/javascript" src="../src/util/list.js"></script>
     <script type="text/javascript" src="../src/component.js"></script>
     <script type="text/javascript" src="../src/panel.js"></script>
+    <script type="text/javascript" src="../src/label.js"></script>
     <script type="text/javascript" src="../src/button.js"></script>
     <script type="text/javascript" src="../src/canvas.js"></script>
-    <script type="text/javascript" src="../src/label.js"></script>
     <!--END: Can be minified-->
     <script type="text/javascript" src="./demo.js"></script>
     <script type="text/javascript" src="./palette.js"></script>
@@ -26,7 +26,29 @@
     </section>
     <section>
         <h2>A Brief Look</h2>
-        <div>TODO</div>
+        <div id="brief-look-wrapper"></div>
+        <h3>Codes</h3>
+        <div class="code">
+            <pre>
+    // Create the canvas
+    var canvas = new Canvas($('brief-look-wrapper'), 500, 100);
+    canvas.setLineWidth(1);
+
+    // Create the button
+    var button = new Button(10, 10, 130, 32, 'Click this button');
+    button.onTap.add(function(left, top) {
+      var message = 'Button has been clicked at [' + left + ', ' + top + ']';
+      label.setText(message);
+    });
+
+    // Create the label
+    var label = new Label(10, 60, 0, 0, 'Label');
+
+    // Add the button and label into the canvas
+    canvas.controls.add(button);
+    canvas.controls.add(label);
+            </pre>
+        </div>
     </section>
     <section>
         <h2>Composite Example: Palette</h2>
