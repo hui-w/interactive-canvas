@@ -14,6 +14,9 @@
   function ResponsiveApp(wrapperId) {
     this.wrapperId = wrapperId;
     this.canvas = null;
+    this.label = null;
+
+    // A user defined component derived from Panel
     this.toolbar = null;
 
     this.render();
@@ -29,19 +32,29 @@
         console.log('Canvas Did Paint');
       }.bind(this));
 
-      // Render a toolbar
+      // Create a toolbar and add into the canvas
       this.toolbar = new Toolbar(0, 0, 0, 0, 'footer1');
       this.toolbar.setFillStyle('#F2F2F2');
-
       this.canvas.controls.add(this.toolbar);
 
-      // Adjust the position and size of the toolbar when canvas size changed
+      // Create a label and add into the canvas
+      this.label = new Label(10, 10, 0, 0, 'Label Text', 'label1')
+      this.label.setProp('isVisible', false);
+      this.canvas.controls.add(this.label);
+
+      // When canvas size changed,
+      // adjust the toolbar and the label
       this.canvas.onSizeChange.add(function(width, height) {
         // Make sure the tool bar has the same width of the canvas
         // and it's always docked to the bottom of the canvas
         this.toolbar.setPosition(0, height - 100);
         this.toolbar.setSize(width, 100);
       }.bind(this));
+
+      this.toolbar.onSave = function() {
+        this.label.setProp('isVisible', true);
+        this.label.setText('Great! You have just clicked the save button.');
+      }.bind(this);
 
       // Render the canvas when everything is ready
       var wrapper = $(this.wrapperId);
@@ -54,9 +67,11 @@
   /* ===== Define the class for toolbar */
   window.Toolbar = Panel.extend({
     saveButton: null,
+    onSave: null,
 
     init: function(left, top, width, height, id) {
       this._super(left, top, width, height, id);
+      this.onSave = null;
 
       // Create a button to render on the right bottom
       this.saveButton = new Button(0, 0, 120, 30, 'Save Button', 'button1');
@@ -66,6 +81,13 @@
       this.onSizeChange.add(function(width, height) {
         // Make sure the button is always on the right side of the toolbar
         this.saveButton.setPosition(width - 155, 35);
+      }.bind(this));
+
+      // Register the button event
+      this.saveButton.onTap.add(function() {
+        if (typeof this.onSave == 'function') {
+          this.onSave();
+        }
       }.bind(this));
     }
   });
