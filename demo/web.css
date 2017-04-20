@@ -1,0 +1,41 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    /*overflow: hidden;*/
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+}
+
+section {
+    margin: 10px;
+    padding: 10px;
+}
+
+a {
+    color: #0070c9;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+.code {
+    background-color: #F7F7F9;
+    border: 1px solid #E1E1E8;
+    padding: 8px 0px;
+}
+
+.footer {
+    padding: 20px 0px;
+}

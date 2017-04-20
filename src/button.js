@@ -41,11 +41,11 @@
 
       // Render the button border and background
       if (this.capturedPosition || this.getProp('isOn')) {
-        context.fillStyle = "#B5B5B5";
-        context.strokeStyle = "#979797";
+        context.fillStyle = "#337AB7";
+        context.strokeStyle = "#337AB7";
       } else {
-        context.fillStyle = "#EBEBEB";
-        context.strokeStyle = "#979797";
+        context.fillStyle = "#FFF";
+        context.strokeStyle = "#337AB7";
       }
 
       if (this.getProp('radius') == 0) {

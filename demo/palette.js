@@ -45,7 +45,7 @@
 
     // ----- Render the label into canvas
     renderLabel: function() {
-      this.label = new Label(80, 20, 0, 0, "Component Based HTML5 Canvas");
+      this.label = new Label(80, 20, 0, 0, "Try to click the colorful rectangles");
       this.label.setFillStyle('#5FBA7D');
       this.label.setLineWidth(2);
       this.label.setStrokeStyle('#5FBA7D');
