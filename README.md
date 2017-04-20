@@ -5,4 +5,4 @@ Javascript library for component-based HTML5 canvas
 https://hui-w.github.io/canvas-ui
 
 ## Overview
-![image](https://raw.githubusercontent.com/hui-w/canvas-ui/master/demo/overview.png)
+![image](https://raw.githubusercontent.com/hui-w/canvas-ui/master/pages/overview.png)

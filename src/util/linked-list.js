@@ -1,3 +1,11 @@
+/** 
+ * @author Wang, Hui (huiwang@qlike.com) 
+ * @repo https://github.com/hui-w/canvas-ui
+ * @licence MIT
+ *
+ * For test only, and this file won't be built into the release file
+ */
+
 function LinkedList() {
   var Node = function(element) {　　　　　　　
     this.element = element;
