@@ -37,19 +37,25 @@
   Palette.prototype = {
     // ----- Render the canvas into wrapper
     renderCanvas: function() {
-      this.canvas = new Canvas(this.wrapper, 500, 300);
+      this.canvas = new Canvas(this.wrapper, 500, 200);
       this.canvas.setFillStyle('#F2F2F2');
       this.canvas.setLineWidth(1);
       this.canvas.setStrokeStyle('#726EAE');
+      this.canvas.onDidPaint.add(function(context) {
+        context.save();
+        context.textBaseline = 'top';
+        context.fillText("Canvas Painted at " + (new Date()).valueOf(), 4, 4);
+        context.restore();
+      }.bind(this));
     },
 
     // ----- Render the label into canvas
     renderLabel: function() {
-      this.label = new Label(80, 20, 0, 0, "Try to click the colorful rectangles");
+      this.label = new Label(80, 140, 0, 0, "Try to click the colorful rectangles");
       this.label.setFillStyle('#5FBA7D');
       this.label.setLineWidth(2);
       this.label.setStrokeStyle('#5FBA7D');
-      this.label.setFontColor('#fff');
+      this.label.setFontColor('#000');
       this.canvas.controls.add(this.label);
     },
 

@@ -16,7 +16,8 @@
     // Create the button
     var button = new Button(10, 10, 130, 32, 'Click this button');
     button.onTap.add(function(left, top) {
-      var message = 'Button has been clicked at [' + left + ', ' + top + ']';
+      var message = '[Timestamp ' + new Date().getTime() +
+        '] Button has been clicked at [' + left + ', ' + top + ']';
       label.setText(message);
     });
 

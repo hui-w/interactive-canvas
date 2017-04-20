@@ -87,6 +87,8 @@
     },
 
     paint: function(context) {
+      this.onWillPaint.trigger(context);
+
       // Clear the canvas
       this.canvas.width = this.canvas.width;
       this.canvas.height = this.canvas.height;
@@ -111,7 +113,7 @@
       // Paint completed
       this.restoreContext(context);
 
-      console.log('Canvas Paint');
+      this.onDidPaint.trigger(context);
     },
 
     /*
