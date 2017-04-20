@@ -10,7 +10,7 @@
 
   function renderBriefLook() {
     // Create the canvas
-    var canvas = new Canvas($('brief-look-wrapper'), 500, 100);
+    var canvas = new Canvas(500, 100);
     canvas.setLineWidth(1);
 
     // Create the button
@@ -27,6 +27,10 @@
     // Add the button and label into the canvas
     canvas.controls.add(button);
     canvas.controls.add(label);
+
+    // Render the canvas when everything is ready
+    var wrapper = $('brief-look-wrapper');
+    canvas.renderInto(wrapper);
   }
 
   addEventListener('load', function() {

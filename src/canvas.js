@@ -10,28 +10,32 @@
 
 (function() {
   var prototype = {
-    wrapper: null,
-    isFullscreen: null,
+    isFullScreen: null,
     canvas: null,
     context: null,
     delayTimer: null,
 
     // Event handlers
-    onResized: null,
     onWillPaint: null,
     onDidPaint: null,
 
-    init: function(wrapper, width, height, isFullscreen) {
-      this._super(0, 0, width, height);
+    init: function(width, height, isFullScreen) {
+      if (isFullScreen) {
+        // Full screen mode will ignore width and height settings
+        var docWidth = document.documentElement.clientWidth;
+        var docHeight = document.documentElement.clientHeight;
+        // this._super(0, 0, docWidth, docHeight);
+        this._super(0, 0, width, height);
+      } else {
+        this._super(0, 0, width, height);
+      }
 
       // Init the members
-      this.wrapper = wrapper;
-      this.isFullscreen = isFullscreen;
+      this.isFullScreen = isFullScreen;
       this.canvas = null;
       this.delayTimer = null;
 
       // Init the event handlers
-      this.onResized = new EventHandler();
       this.onWillPaint = new EventHandler();
       this.onDidPaint = new EventHandler();
 
@@ -40,13 +44,10 @@
         // When painting is requested by children
         this.requestPaint();
       }.bind(this));
-
-      // Render the canvas when initialized
-      this.render();
     },
 
-    render: function() {
-      this.canvas = this.wrapper.createChild('canvas', {
+    renderInto: function(wrapper) {
+      this.canvas = wrapper.createChild('canvas', {
         'width': this.width,
         'height': this.height
       });
@@ -65,7 +66,34 @@
       this.canvas.addEventListener('touchend', this.handleTouch.bind(this), false);
       this.canvas.addEventListener('touchmove', this.handleTouch.bind(this), false);
 
-      // Request to paint when renderred
+      if (this.isFullScreen) {
+        // FullScreen Mode: Calculate the size when renderred
+        // this.resize();
+
+        // Check if the window size is changed
+        var checkWindowsize = function() {
+          var nWidth = document.documentElement.clientWidth;
+          var nHeight = document.documentElement.clientHeight;
+          if (nWidth != this.width || nHeight != this.height) {
+            this.width = nWidth;
+            this.height = nHeight;
+            this.resize();
+          }
+        }.bind(this);
+        setInterval(checkWindowsize, 200);
+      } else {
+        // Non-FullScreen Mode: Request to paint when renderred
+        this.requestPaint();
+      }
+    },
+
+    resize: function() {
+      // Upate the size of the canvas
+      this.canvas.width = this.width;
+      this.canvas.height = this.height;
+
+      this.onSizeChange.trigger(this.width, this.height);
+
       this.requestPaint();
     },
 
@@ -75,8 +103,8 @@
 
     // Add the paint request into the queue
     requestPaint: function() {
-      if (this.delayTimer) {
-        // To aviod duplicated render
+      if (this.delayTimer || !this.canvas) {
+        // To aviod duplicated render or renderring before canvas is ready
         return;
       }
 

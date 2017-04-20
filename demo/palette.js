@@ -8,7 +8,6 @@
 
 (function() {
   function Palette(wrapperId) {
-    this.wrapper = $(wrapperId);
     this.colors = [
       'RGBA(243, 83, 37, 1)',
       'RGBA(129, 188, 6, 1)',
@@ -22,22 +21,26 @@
     this.panels = [];
 
     // Render a canvas object into the DOM
-    this.renderCanvas();
+    this.prepareCanvas();
 
     // Render a label into the canvas
-    this.renderLabel();
+    this.prepareLabel();
 
     // Render the target panel
-    this.renderTargetPanel();
+    this.prepareTargetPanel();
 
     // Render the color panels
-    this.renderColorPanels(this.canvas, this.colors, this.targetPanel, this.highligtPanel);
+    this.prepareColorPanels(this.canvas, this.colors, this.targetPanel, this.highligtPanel);
+
+    // Render the canvas when everything is ready
+    var wrapper = $(wrapperId);
+    this.canvas.renderInto(wrapper);
   }
 
   Palette.prototype = {
-    // ----- Render the canvas into wrapper
-    renderCanvas: function() {
-      this.canvas = new Canvas(this.wrapper, 500, 200);
+    // ----- Prepare the canvas
+    prepareCanvas: function() {
+      this.canvas = new Canvas(500, 200);
       this.canvas.setFillStyle('#F2F2F2');
       this.canvas.setLineWidth(1);
       this.canvas.setStrokeStyle('#726EAE');
@@ -46,11 +49,12 @@
         context.textBaseline = 'top';
         context.fillText("Canvas Painted at " + (new Date()).valueOf(), 4, 4);
         context.restore();
+        console.log('Canvas Did Paint');
       }.bind(this));
     },
 
-    // ----- Render the label into canvas
-    renderLabel: function() {
+    // ----- Prepare the label into canvas
+    prepareLabel: function() {
       this.label = new Label(80, 140, 0, 0, "Try to click the colorful rectangles");
       this.label.setFillStyle('#5FBA7D');
       this.label.setLineWidth(2);
@@ -59,8 +63,8 @@
       this.canvas.controls.add(this.label);
     },
 
-    // ----- Render the target panel
-    renderTargetPanel: function() {
+    // ----- Prepare the target panel
+    prepareTargetPanel: function() {
       this.targetPanel = new Panel(20, 120, 40, 40);
 
       // The panel style
@@ -86,8 +90,8 @@
       }.bind(this));
     },
 
-    // ----- Render the color panels
-    renderColorPanels: function() {
+    // ----- Prepare the color panels
+    prepareColorPanels: function() {
       var panels = [];
 
       this.colors.forEach(function(color, index) {

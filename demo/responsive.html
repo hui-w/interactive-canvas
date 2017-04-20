@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CanvasUI - Responsive Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="./web.css" />
+    <!--BEGIN: Can be minified-->
+    <script type="text/javascript" src="../src/util/class.js"></script>
+    <script type="text/javascript" src="../src/util/pollyfill.js"></script>
+    <script type="text/javascript" src="../src/util/event-handler.js"></script>
+    <script type="text/javascript" src="../src/util/list.js"></script>
+    <script type="text/javascript" src="../src/component.js"></script>
+    <script type="text/javascript" src="../src/panel.js"></script>
+    <script type="text/javascript" src="../src/label.js"></script>
+    <script type="text/javascript" src="../src/button.js"></script>
+    <script type="text/javascript" src="../src/canvas.js"></script>
+    <!--END: Can be minified-->
+    <script type="text/javascript" src="./responsive-app.js"></script>
+</head>
+
+<body style="overflow: hidden">
+    <div id="app-wrapper"></div>
+    <script type="text/javascript">
+    addEventListener('load', function() {
+        var app = new ResponsiveApp('app-wrapper');
+    });
+    </script>
+</body>
+
+</html>

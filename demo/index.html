@@ -32,13 +32,14 @@
         <div class="code">
             <pre>
     // Create the canvas
-    var canvas = new Canvas($('brief-look-wrapper'), 500, 100);
+    var canvas = new Canvas(500, 100);
     canvas.setLineWidth(1);
 
     // Create the button
     var button = new Button(10, 10, 130, 32, 'Click this button');
     button.onTap.add(function(left, top) {
-      var message = 'Button has been clicked at [' + left + ', ' + top + ']';
+      var message = '[Timestamp ' + new Date().getTime() +
+        '] Button has been clicked at [' + left + ', ' + top + ']';
       label.setText(message);
     });
 
@@ -48,6 +49,9 @@
     // Add the button and label into the canvas
     canvas.controls.add(button);
     canvas.controls.add(label);
+
+    // Render the canvas when everything is ready
+    canvas.renderInto($('brief-look-wrapper'));
             </pre>
         </div>
     </section>
@@ -57,7 +61,7 @@
     </section>
     <section>
         <h2>Full Screen Support</h2>
-        <div><a href="./fullscreen.html" target="_blank">Example: Full Screen App</a></div>
+        <div><a href="./responsive.html" target="_blank">Example: Full Screen App</a></div>
     </section>
     <div class="footer">
 

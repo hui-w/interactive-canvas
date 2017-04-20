@@ -26,19 +26,21 @@
     absLeft: null,
     absTop: null,
 
-    // Event to update UI
+    // Events
     onRequestPaint: null,
+    onPositionChange: null,
+    onSizeChange: null,
 
-    // Events handler
+    // Interactive
     onCapture: null,
     onDrag: null,
     onRelease: null,
 
     init: function(left, top, width, height, id) {
-      this.left = left;
-      this.top = top;
-      this.width = width;
-      this.height = height;
+      this.left = left ? left : 0;
+      this.top = top ? top : 0;
+      this.width = width ? width : 0;
+      this.height = height ? height : 0;
       this.id = id;
 
       this.properties = {
@@ -55,6 +57,8 @@
       this.absTop = null;
 
       this.onRequestPaint = new EventHandler();
+      this.onPositionChange = new EventHandler();
+      this.onSizeChange = new EventHandler();
       this.onCapture = new EventHandler();
       this.onDrag = new EventHandler();
       this.onRelease = new EventHandler();
@@ -94,14 +98,15 @@
 
     // Invoked in the callback of WillPaint
     saveContext: function(context) {
-      if (!this.absLeft || !this.absTop) {
+      if (this.absLeft == null || this.absTop == null) {
         // Absolute left and top are usually caculated by parent component
         // This case is for the root controls
         this.absLeft = this.left;
         this.absTop = this.top;
       }
       context.save();
-      if (this.absLeft !== 0 && this.absTop !== 0) {
+
+      if (this.absLeft !== 0 || this.absTop !== 0) {
         context.translate(this.absLeft, this.absTop);
       }
     },
@@ -193,6 +198,39 @@
     // Trigger the event to push the paint request into the queue
     requestPaint: function() {
       this.onRequestPaint.trigger();
+    },
+
+    setPosition: function(left, top) {
+      if (this.left === left && this.top === top) {
+        return;
+      }
+
+      this.left = left;
+      this.top = top;
+      this.requestPaint();
+
+      // Callbacks
+      this.onPositionChange.trigger(left, top);
+
+      // Update children
+      this.controls.forEach(function(control) {
+        // Recaculate children's translate
+        control.requestPaint();
+      });
+    },
+
+    setSize: function(width, height) {
+      if (this.width === width && this.height === height) {
+        return;
+      }
+
+      this.width = width;
+      this.height = height;
+
+      // Callbacks
+      this.onSizeChange.trigger(width, height);
+
+      this.requestPaint();
     }
   };
 
