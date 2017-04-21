@@ -10,8 +10,13 @@
 
 (function() {
   var prototype = {
+    onTextChange: null,
+
     init: function(left, top, width, height, text, id) {
       this._super(left, top, width, height, id);
+
+      // When text is changed
+      this.onTextChange = new EventHandler();
 
       // Extend properties
       var newProperties = {
@@ -39,7 +44,9 @@
 
     setText: function(text) {
       if (this.setProp('text', text)) {
+        this.updateSize();
         this.requestPaint();
+        this.onTextChange.trigger();
       }
     },
 
@@ -51,12 +58,18 @@
 
     setFontSize: function(fontSize) {
       if (this.setProp('fontSize', fontSize)) {
+        this.updateSize();
         this.requestPaint();
       }
     },
 
     // Set the font and get the size
     updateSize: function(context) {
+      if (!context) {
+        // This method may be called ouside of paint without context
+        context = this.getContext();
+      }
+
       context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');
       this.width = context.measureText(this.getProp('text')).width;
       this.height = this.getProp('fontSize');

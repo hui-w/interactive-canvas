@@ -13,6 +13,8 @@
 (function() {
   function ResponsiveApp(wrapperId) {
     this.wrapperId = wrapperId;
+    this.width = 0;
+    this.height = 0;
     this.canvas = null;
     this.label = null;
 
@@ -40,15 +42,27 @@
       // Create a label and add into the canvas
       this.label = new Label(10, 10, 0, 0, 'Label Text', 'label1')
       this.label.setProp('isVisible', false);
+      this.label.setProp('fontSize', 20);
       this.canvas.controls.add(this.label);
 
       // When canvas size changed,
       // adjust the toolbar and the label
       this.canvas.onSizeChange.add(function(width, height) {
+        // Keep the value of new width and height
+        this.width = width;
+        this.height = height;
+
         // Make sure the tool bar has the same width of the canvas
         // and it's always docked to the bottom of the canvas
         this.toolbar.setPosition(0, height - 100);
         this.toolbar.setSize(width, 100);
+
+        this.updateLabelPosition();
+      }.bind(this));
+
+      // When label text changed, update the position
+      this.label.onTextChange.add(function() {
+        this.updateLabelPosition();
       }.bind(this));
 
       this.toolbar.onSave = function() {
@@ -59,6 +73,13 @@
       // Render the canvas when everything is ready
       var wrapper = $(this.wrapperId);
       this.canvas.renderInto(wrapper);
+    },
+
+    updateLabelPosition: function() {
+      // Keep the label on the center screen
+      var labelLeft = (this.width - this.label.width) / 2;
+      var labelTop = (this.height - 100 - this.label.height) / 2;
+      this.label.setPosition(labelLeft, labelTop);
     }
   };
 

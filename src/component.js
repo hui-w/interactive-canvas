@@ -17,9 +17,12 @@
     height: null,
     id: null,
 
+    // Protected properties
+    parent: null,
+    controls: null,
+
     // Properties with getter and setter
     properties: null,
-    controls: null,
 
     // Absolute position of the component
     // This will be caculated when renderring
@@ -43,6 +46,9 @@
       this.height = height ? height : 0;
       this.id = id;
 
+      this.controls = new List();
+      this.parent = null;
+
       this.properties = {
         isEnabled: true,
         isVisible: true,
@@ -50,7 +56,6 @@
         strokeStyle: '#000',
         lineWidth: 0
       };
-      this.controls = new List();
 
       // Initial value of absolute position
       this.absLeft = null;
@@ -65,6 +70,9 @@
 
       // When component added
       this.controls.onAdd.add(function(component) {
+        // Set the parent of the child
+        component.parent = this;
+
         component.onRequestPaint.add(function() {
           // Invoke the request paint chain
           this.onRequestPaint.trigger();
@@ -163,6 +171,35 @@
           component.handleEvent(eventType, left, top);
         }
       });
+    },
+
+    // Find the context in the parent chain
+    getContext: function() {
+      var component = this;
+      while (component != null) {
+        if (component.context) {
+          return component.context;
+        }
+        component = component.parent;
+      }
+
+      return null;
+    },
+
+    // Calculate the absolute position by parents
+    getAbsPostion: function() {
+      var left = this.left;
+      var top = this.top;
+      var parent = this.parent;
+
+      // Get the left and top of all parents
+      while (parent != null) {
+        left += parent.left;
+        top += parent.top;
+        parent = parent.parent;
+      }
+
+      return { left: left, top: top };
     },
 
     setEnabled: function(isEnabled) {

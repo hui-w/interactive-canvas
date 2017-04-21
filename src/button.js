@@ -19,7 +19,7 @@
       // The position where mouse was down
       this.capturedPosition = null;
 
-      // Event list
+      // Button click
       this.onTap = new EventHandler();
 
       // Extend properties
