@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CanvasUI - Component Based HTML5 Canvas</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="./web.css" />
+    <script type="text/javascript" src="./canvas-ui-0.1.1.min.js"></script>
+    <script type="text/javascript" src="./demo.js"></script>
+    <script type="text/javascript" src="./palette.js"></script>
+</head>
+
+<body>
+    <section>
+        <h1>CanvasUI is a Javascript library for the component based HTML5 canvas</h1>
+        <p><a href="./reference.html" target="_blank">API Reference</a></p>
+    </section>
+    <section>
+        <h2>A Brief Look</h2>
+        <div id="brief-look-wrapper"></div>
+        <h3>Codes</h3>
+        <div class="code">
+            <pre>
+    // Create the canvas
+    var canvas = new Canvas(500, 100);
+    canvas.setProp('lineWidth', 1);
+
+    // Create the button
+    var button = new Button(10, 10, 130, 32, 'Click this button');
+    button.onTap.add(function(left, top) {
+      var message = '[Timestamp ' + new Date().getTime() +
+        '] Button has been clicked at [' + left + ', ' + top + ']';
+      label.setProp('text', message);
+    });
+
+    // Create the label
+    var label = new Label(10, 60, 0, 0, 'Label');
+
+    // Add the button and label into the canvas
+    canvas.controls.add(button);
+    canvas.controls.add(label);
+
+    // Render the canvas when everything is ready
+    canvas.renderInto($('brief-look-wrapper'));
+            </pre>
+        </div>
+    </section>
+    <section>
+        <h2>Composite Example: Palette</h2>
+        <div id="palette-wrapper"></div>
+    </section>
+    <section>
+        <h2>Full Screen Support</h2>
+        <div><a href="./responsive.html" target="_blank">Example: Full Screen App</a></div>
+    </section>
+    <div class="footer">
+
+    </div>
+</body>
+
+</html>
