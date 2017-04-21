@@ -30,36 +30,38 @@
       this.properties = Object.assign({}, this.properties, newProperties);
     },
 
-    setHorizontalAlign: function(horizontalAlign) {
-      if (this.setProp('horizontalAlign', horizontalAlign)) {
-        this.requestPaint();
-      }
-    },
+    setProp: function(key, value) {
+      this._super(key, value);
 
-    setVerticalAlign: function(verticalAlign) {
-      if (this.setProp('verticalAlign', verticalAlign)) {
-        this.requestPaint();
-      }
-    },
-
-    setText: function(text) {
-      if (this.setProp('text', text)) {
-        this.updateSize();
-        this.requestPaint();
-        this.onTextChange.trigger();
-      }
-    },
-
-    setFontColor: function(fontColor) {
-      if (this.setProp('fontColor', fontColor)) {
-        this.requestPaint();
-      }
-    },
-
-    setFontSize: function(fontSize) {
-      if (this.setProp('fontSize', fontSize)) {
-        this.updateSize();
-        this.requestPaint();
+      switch (key) {
+        case 'horizontalAlign':
+          if (this.updatePropValue('horizontalAlign', value)) {
+            this.requestPaint();
+          }
+          break;
+        case 'verticalAlign':
+          if (this.updatePropValue('verticalAlign', value)) {
+            this.requestPaint();
+          }
+          break;
+        case 'text':
+          if (this.updatePropValue('text', value)) {
+            this.updateSize();
+            this.requestPaint();
+            this.onTextChange.trigger();
+          }
+          break;
+        case 'fontColor':
+          if (this.updatePropValue('fontColor', value)) {
+            this.requestPaint();
+          }
+          break;
+        case 'fontSize':
+          if (this.updatePropValue('fontSize', value)) {
+            this.updateSize();
+            this.requestPaint();
+          }
+          break;
       }
     },
 
@@ -68,6 +70,11 @@
       if (!context) {
         // This method may be called ouside of paint without context
         context = this.getContext();
+
+        if (!context) {
+          // Still no context as the canvas may not renderred
+          return;
+        }
       }
 
       context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');

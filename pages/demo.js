@@ -11,14 +11,14 @@
   function renderBriefLook() {
     // Create the canvas
     var canvas = new Canvas(500, 100);
-    canvas.setLineWidth(1);
+    canvas.setProp('lineWidth', 1);
 
     // Create the button
     var button = new Button(10, 10, 130, 32, 'Click this button');
     button.onTap.add(function(left, top) {
       var message = '[Timestamp ' + new Date().getTime() +
         '] Button has been clicked at [' + left + ', ' + top + ']';
-      label.setText(message);
+      label.setProp('text', message);
     });
 
     // Create the label

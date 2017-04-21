@@ -41,9 +41,9 @@
     // ----- Prepare the canvas
     prepareCanvas: function() {
       this.canvas = new Canvas(500, 200);
-      this.canvas.setFillStyle('#F2F2F2');
-      this.canvas.setLineWidth(1);
-      this.canvas.setStrokeStyle('#726EAE');
+      this.canvas.setProp('fillStyle', '#F2F2F2');
+      this.canvas.setProp('lineWidth', 1);
+      this.canvas.setProp('strokeStyle', '#726EAE');
       this.canvas.onDidPaint.add(function(context) {
         context.save();
         context.textBaseline = 'top';
@@ -56,10 +56,10 @@
     // ----- Prepare the label into canvas
     prepareLabel: function() {
       this.label = new Label(80, 140, 0, 0, "Try to click the colorful rectangles");
-      this.label.setFillStyle('#5FBA7D');
-      this.label.setLineWidth(2);
-      this.label.setStrokeStyle('#5FBA7D');
-      this.label.setFontColor('#000');
+      this.label.setProp('fillStyle', '#5FBA7D');
+      this.label.setProp('lineWidth', 2);
+      this.label.setProp('strokeStyle', '#5FBA7D');
+      this.label.setProp('fontColor', '#000');
       this.canvas.controls.add(this.label);
     },
 
@@ -68,9 +68,9 @@
       this.targetPanel = new Panel(20, 120, 40, 40);
 
       // The panel style
-      this.targetPanel.setFillStyle('#FFF');
-      this.targetPanel.setStrokeStyle('#000');
-      this.targetPanel.setLineWidth(1);
+      this.targetPanel.setProp('fillStyle', '#FFF');
+      this.targetPanel.setProp('strokeStyle', '#000');
+      this.targetPanel.setProp('lineWidth', 1);
 
       // Add it into the canvas
       this.canvas.controls.add(this.targetPanel);
@@ -78,14 +78,14 @@
       // Register the event
       this.targetPanel.onCapture.add(function(left, top) {
         // Output the log
-        this.label.setText(['Target Panel Captured on [', left, top, ']'].join(' '));
+        this.label.setProp('text', ['Target Panel Captured on [', left, top, ']'].join(' '));
 
         // Restore the background
-        this.targetPanel.setFillStyle('#FFF');
+        this.targetPanel.setProp('fillStyle', '#FFF');
 
         // Restore borders of color panels
         this.panels.forEach(function(panel) {
-          panel.setLineWidth(0);
+          panel.setProp('lineWidth', 0);
         });
       }.bind(this));
     },
@@ -101,7 +101,7 @@
         // Register the event
         panel.onRelease.add(function(left, top) {
           // Output the log
-          this.label.setText(
+          this.label.setProp('text', 
             ['Captured Panel',
               panel.id,
               'on [',
@@ -113,14 +113,14 @@
           );
 
           // Copy its background color to the target
-          this.targetPanel.setFillStyle(panel.getProp('fillStyle'));
+          this.targetPanel.setProp('fillStyle', panel.getProp('fillStyle'));
 
           // Highlight self
           this.highligtPanel(panels, panel);
         }.bind(this));
 
         // Set the background color of the panel
-        panel.setFillStyle(color);
+        panel.setProp('fillStyle', color);
 
         // Add the panel into the controls hierarchy
         if (panels.length > 0) {
@@ -145,10 +145,10 @@
       panels.forEach(function(panel) {
         if (panel === panelToHighlight) {
           // Highlight self by border
-          panel.setLineWidth(1);
+          panel.setProp('lineWidth', 1);
         } else if (panel.getProp('lineWidth') !== 0) {
           // Un-highlight others
-          panel.setLineWidth(0);
+          panel.setProp('lineWidth', 0);
         }
       });
     }

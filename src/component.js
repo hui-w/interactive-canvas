@@ -80,8 +80,8 @@
       }.bind(this));
     },
 
-    // Get the value of the property
-    setProp: function(key, value, propagate) {
+    // [Protected] Update the value of the property
+    updatePropValue: function(key, value, propagate) {
       if (this.properties[key] === value) {
         return false;
       }
@@ -102,6 +102,37 @@
     // Set the value of the property
     getProp: function(key) {
       return this.properties[key];
+    },
+
+    // Set te value of the property
+    setProp: function(key, value) {
+      switch (key) {
+        case 'isEnabled':
+          if (this.updatePropValue('isEnabled', value, true)) {
+            this.requestPaint();
+          }
+          break;
+        case 'isVisible':
+          if (this.updatePropValue('isVisible', value, true)) {
+            this.requestPaint();
+          }
+          break;
+        case 'fillStyle':
+          if (this.updatePropValue('fillStyle', value)) {
+            this.requestPaint();
+          }
+          break;
+        case 'strokeStyle':
+          if (this.updatePropValue('strokeStyle', value)) {
+            this.requestPaint();
+          }
+          break;
+        case 'lineWidth':
+          if (this.updatePropValue('lineWidth', value)) {
+            this.requestPaint();
+          }
+          break;
+      }
     },
 
     // Invoked in the callback of WillPaint
@@ -173,6 +204,11 @@
       });
     },
 
+    // Trigger the event to push the paint request into the queue
+    requestPaint: function() {
+      this.onRequestPaint.trigger();
+    },
+
     // Find the context in the parent chain
     getContext: function() {
       var component = this;
@@ -200,41 +236,6 @@
       }
 
       return { left: left, top: top };
-    },
-
-    setEnabled: function(isEnabled) {
-      if (this.setProp('isEnabled', isEnabled, true)) {
-        this.requestPaint();
-      }
-    },
-
-    setVisible: function(isVisible) {
-      if (this.setProp('isVisible', isVisible, true)) {
-        this.requestPaint();
-      }
-    },
-
-    setFillStyle: function(fillStyle) {
-      if (this.setProp('fillStyle', fillStyle)) {
-        this.requestPaint();
-      }
-    },
-
-    setStrokeStyle: function(strokeStyle) {
-      if (this.setProp('strokeStyle', strokeStyle)) {
-        this.requestPaint();
-      }
-    },
-
-    setLineWidth: function(lineWidth) {
-      if (this.setProp('lineWidth', lineWidth)) {
-        this.requestPaint();
-      }
-    },
-
-    // Trigger the event to push the paint request into the queue
-    requestPaint: function() {
-      this.onRequestPaint.trigger();
     },
 
     setPosition: function(left, top) {
