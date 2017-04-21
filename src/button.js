@@ -33,6 +33,9 @@
       this.onCapture.add(this.handleCapture.bind(this));
       this.onRelease.add(this.handleRelease.bind(this));
       this.onDrag.add(this.handleDrag.bind(this));
+
+      // Default font color
+      this.properties['fontColor'] = '#337AB7';
     },
 
     paint: function(context) {
