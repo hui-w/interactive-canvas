@@ -31,7 +31,7 @@ echo "Adding the version header..."
 cat \
 ./version.js \
 $OUT/temp.minified.js \
-> $OUT/canvas-ui-0.1.1.min.js
+> $OUT/interactive-canvas-0.1.1.min.js
 
 echo "Deleting temporary files..."
 rm -f $OUT/temp.combined.js
@@ -39,7 +39,7 @@ rm -f $OUT/temp.minified.js
 
 echo "Preparing files for web site..."
 mkdir $OUT/pages
-cp $OUT/canvas-ui-0.1.1.min.js $OUT/pages/canvas-ui-0.1.1.min.js
+cp $OUT/interactive-canvas-0.1.1.min.js $OUT/pages/interactive-canvas-0.1.1.min.js
 cp ../pages/demo.js $OUT/pages/demo.js
 cp ../pages/index_release.html $OUT/pages/index.html
 cp ../pages/overview.png $OUT/pages/overview.png

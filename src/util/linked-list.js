@@ -1,6 +1,6 @@
 /** 
  * @author Wang, Hui (huiwang@qlike.com) 
- * @repo https://github.com/hui-w/canvas-ui
+ * @repo https://github.com/hui-w/interactive-canvas
  * @licence MIT
  *
  * For test only, and this file won't be built into the release file
