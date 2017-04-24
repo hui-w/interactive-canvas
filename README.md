@@ -1,14 +1,14 @@
 # Interactive Canvas
 Javascript library for component-based HTML5 canvas
 
-## How simple it is
+## A Brief Look
 
 ```js
-    // Create the canvas
+    // Create a canvas
     var canvas = new Canvas(500, 100);
     canvas.setProp('lineWidth', 1);
 
-    // Create the button
+    // Create a button
     var button = new Button(10, 10, 130, 32, 'Click this button');
     button.onTap.add(function(left, top) {
       var message = '[Timestamp ' + new Date().getTime() +
@@ -16,7 +16,7 @@ Javascript library for component-based HTML5 canvas
       label.setProp('text', message);
     });
 
-    // Create the label
+    // Create a label
     var label = new Label(10, 60, 0, 0, 'Label');
 
     // Add the button and label into the canvas
