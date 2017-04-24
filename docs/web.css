@@ -39,3 +39,22 @@ a:active {
 .footer {
     padding: 20px 0px;
 }
+
+.api-table {
+    border-collapse: collapse;
+}
+
+.api-table,
+th,
+td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.api-table th {
+    background-color: #F2F2F2;
+}
+
+.api-table .key {
+    font-weight: bold;
+}

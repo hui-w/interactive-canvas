@@ -17,7 +17,85 @@
     </section>
     <section>
         <h2>[Class] Component</h2>
-        <p>TBD</p>
+        <p>
+            Component is the base class for all controls (including Canvas).
+            <br /> All other controls will inherit its properties, methods and events.
+        </p>
+        <p>
+            <table class="api-table" style="width: 600px;">
+                <tr>
+                    <th colspan="2">Properties</td>
+                </tr>
+                <tr>
+                    <td class="key" style="width: 150px;">
+                        isEnabled
+                    </td>
+                    <td>
+                        Default Value: true
+                        <p>
+                            When setting this property, the value will be propagated to all the controls in the children tree.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="key">
+                        isVisible
+                    </td>
+                    <td>
+                        Default Value: true
+                        <p>
+                            When setting this property, the value will be propagated to all the controls in the children tree.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="key">
+                        fillStyle
+                    </td>
+                    <td>
+                        Default Value: null
+                    </td>
+                </tr>
+                <tr>
+                    <td class="key">
+                        strokeStyle
+                    </td>
+                    <td>
+                        Default Value: '#000'
+                    </td>
+                </tr>
+                <tr>
+                    <td class="key">
+                        lineWidth
+                    </td>
+                    <td>
+                        Default Value: 0
+                        <p>
+                            The border will be drawn only if "lineWidth" not equals 0 and "strokeStyle" is not null.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">Methods</td>
+                </tr>
+                <tr>
+                    <td class="key">
+                        getProp(key)
+                    </td>
+                    <td>
+                        Get the value of a property by key.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="key">
+                        setProp(key, vakue)
+                    </td>
+                    <td>
+                        Set the value of property by key.
+                    </td>
+                </tr>
+            </table>
+        </p>
     </section>
     <section>
         <h2>[Class] Canvas</h2>
