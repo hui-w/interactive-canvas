@@ -24,7 +24,7 @@
         <p>
             <table class="api-table" style="width: 600px;">
                 <tr>
-                    <th colspan="2">Properties</td>
+                    <th colspan="2">Properties</th>
                 </tr>
                 <tr>
                     <td class="key" style="width: 150px;">
@@ -76,7 +76,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th colspan="2">Methods</td>
+                    <th colspan="2">Methods</th>
                 </tr>
                 <tr>
                     <td class="key">
@@ -99,7 +99,59 @@
     </section>
     <section>
         <h2>[Class] Canvas</h2>
-        <p>TBD</p>
+        <p>
+            Canvas is the container for all controls.
+            <br /> It's derived from Component.
+        </p>
+        <p>
+            <table class="api-table" style="width: 600px;">
+                <tr>
+                    <th colspan="2">Constructor</th>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        var canvas = new Canvas(width, height, isFullScreen);
+                        <p><strong>width:</strong> Width of the canvas.</p>
+                        <p><strong>height:</strong> height of the canvasH.</p>
+                        <p><strong>isFullScreen:</strong> If the canvas is responsive, and it's false by default.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">Events</th>
+                </tr>
+                <tr>
+                    <td class="key">
+                        onWillPaint(context)
+                    </td>
+                    <td>
+                        Before the canvas painting.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="key">
+                        onDidPaint(context)
+                    </td>
+                    <td>
+                        When the canvas is painted.
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">Example</th>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <pre>
+    var canvas = new Canvas(500, 100);
+    canvas.setProp('lineWidth', 1);
+    canvas.setProp('strokeStyle', '#333');
+    canvas.setProp('fillStyle', 'RGBA(0, 0, 0, 0.5)');
+    var wrapper = document.getElementById('brief-look-wrapper');
+    canvas.renderInto(wrapper);
+                        </pre>
+                    </td>
+                </tr>
+            </table>
+        </p>
     </section>
     <section>
         <h2>[Class] Panel</h2>
