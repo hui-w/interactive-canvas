@@ -33,5 +33,5 @@ canvas.renderInto(wrapper);
 ## More Demo
 https://hui-w.github.io/interactive-canvas
 
-## API Reference (TBD)
+## API Reference
 https://hui-w.github.io/interactive-canvas/reference.html
