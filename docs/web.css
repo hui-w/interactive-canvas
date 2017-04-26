@@ -37,7 +37,9 @@ a:active {
 }
 
 .footer {
-    padding: 20px 0px;
+    padding: 20px 20px;
+    border-top: 1px solid #ccc;
+    text-align: right;
 }
 
 .api-table {
@@ -51,10 +53,38 @@ td {
     padding: 10px;
 }
 
+.api-table {
+    width: 600px;
+}
+
 .api-table th {
     background-color: #F2F2F2;
 }
 
 .api-table .key {
     font-weight: bold;
+}
+
+.api-navi {
+    position: fixed;
+    left: 10px;
+    top: 30px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.api-navi ol {
+    padding: 0px 15px;
+}
+
+.api-navi ol li {
+    padding: 4px 2px;
+}
+
+.api-document {
+    padding-left: 150px;
+}
+
+.api-document p {
+    text-align: justify;
 }

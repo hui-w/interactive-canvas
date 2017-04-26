@@ -29,14 +29,16 @@
       // Create a canvas object
       var isFullScreen = true;
       this.canvas = new Canvas(0, 0, isFullScreen);
-      this.canvas.setProp('fillStyle', '#FFF');
+      this.canvas.setProp('fillStyle', '#F4F8FB');
       this.canvas.onDidPaint.add(function(context) {
         console.log('Canvas Did Paint');
       }.bind(this));
 
       // Create a toolbar and add into the canvas
       this.toolbar = new Toolbar(0, 0, 0, 0, 'footer1');
-      this.toolbar.setProp('fillStyle', '#F2F2F2');
+      this.toolbar.setProp('fillStyle', '#FDF8E2');
+      this.toolbar.setProp('strokeStyle', '#EFE9D7');
+      this.toolbar.setProp('lineWidth', 1);
       this.canvas.controls.add(this.toolbar);
 
       // Create a label and add into the canvas
