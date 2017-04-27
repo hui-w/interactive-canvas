@@ -3,6 +3,8 @@ Javascript library for component-based HTML5 canvas
 
 ## A Brief Look
 
+[View in CodePen](https://codepen.io/hui-w/pen/XRpMVj)
+
 ```js
 // Create a canvas with border
 var canvas = new Canvas(500, 100);

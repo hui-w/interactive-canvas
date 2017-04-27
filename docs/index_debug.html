@@ -23,12 +23,12 @@
 <body>
     <section>
         <h1>Interactive Canvas is a Javascript library for the component based HTML5 canvas</h1>
-        <p><a href="./reference.html" target="_blank">API Reference</a></p>
     </section>
     <section>
         <h2>A Brief Look</h2>
         <div id="brief-look-wrapper"></div>
         <h3>Codes</h3>
+        <p><a href="https://codepen.io/hui-w/pen/XRpMVj" target="_blank">[View in CodePen]</a></p>
         <div class="code">
             <pre>
     // Create a canvas
@@ -38,8 +38,7 @@
     // Create a button
     var button = new Button(10, 10, 130, 32, 'Click this button');
     button.onTap.add(function(left, top) {
-      var message = '[Timestamp ' + new Date().getTime() +
-        '] Button has been clicked at [' + left + ', ' + top + ']';
+      var message = 'Button has been clicked at [' + left + ', ' + top + ']';
       label.setProp('text', message);
     });
 
@@ -57,11 +56,17 @@
     </section>
     <section>
         <h2>Composite Example: Palette</h2>
+        <p><a href="https://codepen.io/hui-w/pen/JNEWwO" target="_blank">[View in CodePen]</a></p>
         <div id="palette-wrapper"></div>
     </section>
     <section>
         <h2>Full Screen Support</h2>
         <div><a href="./responsive.html" target="_blank">Example: Full Screen App</a></div>
+        <p><a href="https://codepen.io/hui-w/pen/QvdpXj/" target="_blank">[View in CodePen]</a></p>
+    </section>
+    <section>
+        <h2>API Reference</h2>
+        <p><a href="./reference.html" target="_blank">API Reference</a></p>
     </section>
     <div class="footer">
         Designed and built by <a href="https://github.com/hui-w">Hui WANG</a>
