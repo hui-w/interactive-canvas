@@ -25,17 +25,26 @@
       // Extend properties
       var newProperties = {
         isOn: false,
-        radius: 0
+        radius: 0,
+        focusStyle: {
+          fillStyle: '#337AB7',
+          strokeStyle: '#337AB7',
+          lineWidth: 1,
+          fontColor: '#fff'
+        }
       };
       this.properties = Object.assign({}, this.properties, newProperties);
+
+      // Set the default value of properties
+      this.properties['fillStyle'] = '#FFF';
+      this.properties['strokeStyle'] = '#337AB7';
+      this.properties['lineWidth'] = 1;
+      this.properties['fontColor'] = '#337AB7';
 
       // Register the internal events
       this.onCapture.add(this.handleCapture.bind(this));
       this.onRelease.add(this.handleRelease.bind(this));
       this.onDrag.add(this.handleDrag.bind(this));
-
-      // Default font color
-      this.properties['fontColor'] = '#337AB7';
     },
 
     paint: function(context) {
@@ -44,11 +53,13 @@
 
       // Render the button border and background
       if (this.capturedPosition || this.getProp('isOn')) {
-        context.fillStyle = "#337AB7";
-        context.strokeStyle = "#337AB7";
+        context.fillStyle = this.getProp('focusStyle', 'fillStyle');
+        context.strokeStyle = this.getProp('focusStyle', 'strokeStyle');
+        context.lineWidth = this.getProp('focusStyle', 'lineWidth');
       } else {
-        context.fillStyle = "#FFF";
-        context.strokeStyle = "#337AB7";
+        context.fillStyle = this.getProp('fillStyle');
+        context.strokeStyle = this.getProp('strokeStyle');
+        context.lineWidth = this.getProp('lineWidth');
       }
 
       if (this.getProp('radius') == 0) {
@@ -68,7 +79,7 @@
       // Render the text
       if (this.getProp('text')) {
         if (this.capturedPosition || this.getProp('isOn')) {
-          context.fillStyle = '#fff';
+          context.fillStyle = this.getProp('focusStyle', 'fontColor');
         } else {
           context.fillStyle = this.getProp('fontColor');
         }
@@ -80,15 +91,28 @@
       this.restoreContext(context);
     },
 
-    setIsOn: function(isOn) {
-      if (this.setProp('isOn', isOn)) {
-        this.requestPaint();
-      }
-    },
+    setProp: function(key, value) {
+      this._super(key, value);
 
-    setRadius: function(radius) {
-      if (this.setProp('radius', radius)) {
-        this.requestPaint();
+      switch (key) {
+        case 'isOn':
+          if (this.updatePropValue('isOn', value)) {
+            this.requestPaint();
+          }
+          break;
+        case 'radius':
+          if (this.updatePropValue('radius', value)) {
+            this.requestPaint();
+          }
+          break;
+        case 'focusStyle':
+          // TODO: to be enhanced
+          this.properties['focusStyle'] = Object.assign(
+            this.properties['focusStyle'],
+            value
+          );
+          this.requestPaint();
+          break;
       }
     },
 

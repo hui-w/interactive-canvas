@@ -100,8 +100,16 @@
     },
 
     // Set the value of the property
-    getProp: function(key) {
-      return this.properties[key];
+    getProp: function(key, subKey) {
+      if (key == null) {
+        return null;
+      }
+
+      if (this.properties[key] != null && subKey != null) {
+        return this.properties[key][subKey];
+      } else {
+        return this.properties[key];
+      }
     },
 
     // Set te value of the property
