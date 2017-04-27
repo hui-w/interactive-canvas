@@ -176,7 +176,7 @@
             <h2>[Class] Panel</h2>
             <p>
                 Panel renders a rectangle on the canvas. It can have border or background color.
-                <br /> It's derived from Component .
+                <br /> It's derived from Component.
             </p>
             <p>
                 <table class="api-table">
@@ -213,7 +213,112 @@
         <a name="label"></a>
         <section>
             <h2>[Class] Label</h2>
-            <p>TBD</p>
+            <p>
+                Label renders text on the canvas. It can have border or background color.
+                <br /> It's derived from Panel.
+            </p>
+            <p>
+                <table class="api-table">
+                    <tr>
+                        <th colspan="2">Constructor</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            var label = new Label(left, top, width, height, text, id);
+                            <p><strong>left:</strong> Left of the control, which is relative to its parent.</p>
+                            <p><strong>top:</strong> Top of the control, which is relative to its parent.</p>
+                            <p><strong>width:</strong> Width of the control. </p>
+                            <p><strong>height:</strong> Height of the control. </p>
+                            <p><em>(If "isSizeFixed" equals false, width and height will be calculated according to the text content, and values passed in will be ignored.)</em></p>
+                            <p><strong>text:</strong> The text content to be renderred.</p>
+                            <p><strong>id:</strong> Optional, and you may leave it empty.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Properties</th>
+                    </tr>
+                    <tr>
+                        <td class="key" style="width: 150px;">
+                            fontSize
+                        </td>
+                        <td>
+                            Default Value: 12
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="width: 150px;">
+                            fontFace
+                        </td>
+                        <td>
+                            Default Value: 'Arial, Helvetica, sans-serif'
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="width: 150px;">
+                            fontColor
+                        </td>
+                        <td>
+                            Default Value: '#000000'
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="width: 150px;">
+                            text
+                        </td>
+                        <td>
+                            <p>
+                                The text content to be renderred.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="width: 150px;">
+                            horizontalAlign
+                        </td>
+                        <td>
+                            Default Value: 'left'
+                            <p>
+                                Value Options: 'left' | 'center' | 'right'
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="width: 150px;">
+                            verticalAlign
+                        </td>
+                        <td>
+                            Default Value: 'top'
+                            <p>
+                                Value Options: 'top' | 'middle' | 'bottom'
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="width: 150px;">
+                            isSizeFixed
+                        </td>
+                        <td>
+                            Default Value: false
+                            <p>
+                                If "isSizeFixed" equals false, width and height will be calculated according to the text content, and values passed in will be ignored.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Example</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <pre>
+    var label = new Label(10, 10, 0, 0, 'Label Text', 'label1')
+    label.setProp('isVisible', false);
+    label.setProp('fontSize', 20);
+    canvas.controls.add(label);
+                        </pre>
+                        </td>
+                    </tr>
+                </table>
+            </p>
         </section>
         <a name="button"></a>
         <section>

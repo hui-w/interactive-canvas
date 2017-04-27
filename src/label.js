@@ -25,7 +25,8 @@
         fontColor: '#000000',
         text: text,
         horizontalAlign: 'left',
-        verticalAlign: 'top'
+        verticalAlign: 'top',
+        isSizeFixed: false
       };
       this.properties = Object.assign({}, this.properties, newProperties);
     },
@@ -78,8 +79,12 @@
       }
 
       context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');
-      this.width = context.measureText(this.getProp('text')).width;
-      this.height = this.getProp('fontSize');
+
+      if (!this.getProp('isSizeFixed')) {
+        // Set the caculated size
+        this.width = context.measureText(this.getProp('text')).width;
+        this.height = this.getProp('fontSize');
+      }
     },
 
     paint: function(context) {
