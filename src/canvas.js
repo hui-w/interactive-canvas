@@ -20,15 +20,14 @@
     onDidPaint: null,
 
     init: function(width, height, isFullScreen) {
-      if (isFullScreen) {
+      // if (isFullScreen) {
         // Full screen mode will ignore width and height settings
-        var docWidth = document.documentElement.clientWidth;
-        var docHeight = document.documentElement.clientHeight;
-        // this._super(0, 0, docWidth, docHeight);
-        this._super(0, 0, width, height);
-      } else {
-        this._super(0, 0, width, height);
-      }
+      //  var docWidth = document.documentElement.clientWidth;
+      //  var docHeight = document.documentElement.clientHeight;
+      //   this._super(0, 0, docWidth, docHeight);
+      //} else {
+      this._super(0, 0, width, height);
+      //}
 
       // Init the members
       this.isFullScreen = isFullScreen;
