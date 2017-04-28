@@ -25,7 +25,7 @@ canvas.controls.add(button);
 canvas.controls.add(label);
 
 // Render the canvas when everything is ready
-var wrapper = $('brief-look-wrapper');
+var wrapper = document.getElementById('brief-look-wrapper');
 canvas.renderInto(wrapper);
 ```
 
