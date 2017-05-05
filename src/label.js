@@ -78,6 +78,9 @@
         }
       }
 
+      context.save();
+
+      // Set the font temporary for mesuring the size
       context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');
 
       if (!this.getProp('isSizeFixed')) {
@@ -85,24 +88,48 @@
         this.width = context.measureText(this.getProp('text')).width;
         this.height = this.getProp('fontSize');
       }
+      context.restore();
     },
 
     paint: function(context) {
-      // Prepare to paint
-      this.saveContext(context);
-
       // Update the width and height
       this.updateSize(context);
+      
+      // Prepare to paint
+      this.saveContext(context);
 
       // Base Paint()
       this._super(context, true);
 
-      // Set the font color and render the text
+      // Set the font and render the text
+      context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');
       context.fillStyle = this.getProp('fontColor');
       context.fillTextEx(this.getProp('text'), 0, 0,
         this.getProp('horizontalAlign'),
         this.getProp('verticalAlign')
       );
+
+      /*
+      function wrapText(context, text, x, y, maxWidth, lineHeight) {
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        }
+        context.fillText(line, x, y);
+      }
+      */
 
       // Paint completed
       this.restoreContext(context);

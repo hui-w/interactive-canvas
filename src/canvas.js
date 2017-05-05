@@ -15,10 +15,6 @@
     context: null,
     delayTimer: null,
 
-    // Event handlers
-    onWillPaint: null,
-    onDidPaint: null,
-
     init: function(width, height, isFullScreen) {
       // if (isFullScreen) {
         // Full screen mode will ignore width and height settings
@@ -33,10 +29,6 @@
       this.isFullScreen = isFullScreen;
       this.canvas = null;
       this.delayTimer = null;
-
-      // Init the event handlers
-      this.onWillPaint = new EventHandler();
-      this.onDidPaint = new EventHandler();
 
       // Handle the painting request from children
       this.onRequestPaint.add(function() {
@@ -118,8 +110,6 @@
       this.canvas.width = this.canvas.width;
       this.canvas.height = this.canvas.height;
 
-      this.onWillPaint.trigger(context);
-
       // Prepare to paint
       this.saveContext(context);
 
@@ -139,8 +129,6 @@
 
       // Paint completed
       this.restoreContext(context);
-
-      this.onDidPaint.trigger(context);
     },
 
     /*

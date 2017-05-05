@@ -54,7 +54,7 @@ td {
 }
 
 .api-table {
-    width: 600px;
+    width: 800px;
 }
 
 .api-table th {
@@ -63,6 +63,7 @@ td {
 
 .api-table .key {
     font-weight: bold;
+    width: 220px;
 }
 
 .api-navi {

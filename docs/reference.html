@@ -44,7 +44,7 @@
                         <th colspan="2">Properties</th>
                     </tr>
                     <tr>
-                        <td class="key" style="width: 150px;">
+                        <td class="key">
                             isEnabled
                         </td>
                         <td>
@@ -93,6 +93,41 @@
                         </td>
                     </tr>
                     <tr>
+                        <th colspan="2">Events</th>
+                    </tr>
+                    <tr>
+                        <td class="key">
+                            onSizeChanged(width, height)
+                        </td>
+                        <td>
+                            The call back which is triggered when the component position is changed.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key">
+                            onPositionChanged(left, top)
+                        </td>
+                        <td>
+                            The call back which is triggered when the component size is changed.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key">
+                            onWillPaint(context)
+                        </td>
+                        <td>
+                            The call back which is triggered when the component will start to painting.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key">
+                            onDidPaint(context)
+                        </td>
+                        <td>
+                            The call back which is triggered when the component has finished painting.
+                        </td>
+                    </tr>
+                    <tr>
                         <th colspan="2">Methods</th>
                     </tr>
                     <tr>
@@ -132,25 +167,6 @@
                             <p><strong>width:</strong> Width of the canvas.</p>
                             <p><strong>height:</strong> Height of the canvas.</p>
                             <p><strong>isFullScreen:</strong> If the canvas is responsive. (Default value: false)</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th colspan="2">Events</th>
-                    </tr>
-                    <tr>
-                        <td class="key">
-                            onWillPaint(context)
-                        </td>
-                        <td>
-                            Before the canvas painting.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="key">
-                            onDidPaint(context)
-                        </td>
-                        <td>
-                            When the canvas is painted.
                         </td>
                     </tr>
                     <tr>
@@ -238,7 +254,7 @@ canvas.controls.add(panel);
                         <th colspan="2">Properties</th>
                     </tr>
                     <tr>
-                        <td class="key" style="width: 150px;">
+                        <td class="key">
                             fontSize
                         </td>
                         <td>
@@ -246,7 +262,7 @@ canvas.controls.add(panel);
                         </td>
                     </tr>
                     <tr>
-                        <td class="key" style="width: 150px;">
+                        <td class="key">
                             fontFace
                         </td>
                         <td>
@@ -254,7 +270,7 @@ canvas.controls.add(panel);
                         </td>
                     </tr>
                     <tr>
-                        <td class="key" style="width: 150px;">
+                        <td class="key">
                             fontColor
                         </td>
                         <td>
@@ -262,7 +278,7 @@ canvas.controls.add(panel);
                         </td>
                     </tr>
                     <tr>
-                        <td class="key" style="width: 150px;">
+                        <td class="key">
                             text
                         </td>
                         <td>
@@ -272,7 +288,7 @@ canvas.controls.add(panel);
                         </td>
                     </tr>
                     <tr>
-                        <td class="key" style="width: 150px;">
+                        <td class="key">
                             horizontalAlign
                         </td>
                         <td>
@@ -283,7 +299,7 @@ canvas.controls.add(panel);
                         </td>
                     </tr>
                     <tr>
-                        <td class="key" style="width: 150px;">
+                        <td class="key">
                             verticalAlign
                         </td>
                         <td>
@@ -294,7 +310,7 @@ canvas.controls.add(panel);
                         </td>
                     </tr>
                     <tr>
-                        <td class="key" style="width: 150px;">
+                        <td class="key">
                             isSizeFixed
                         </td>
                         <td>
@@ -346,7 +362,7 @@ canvas.controls.add(label);
                         <th colspan="2">Properties</th>
                     </tr>
                     <tr>
-                        <td class="key" style="width: 150px;">
+                        <td class="key">
                             isOn
                         </td>
                         <td>
@@ -354,7 +370,7 @@ canvas.controls.add(label);
                         </td>
                     </tr>
                     <tr>
-                        <td class="key" style="width: 150px;">
+                        <td class="key">
                             radius
                         </td>
                         <td>
@@ -362,7 +378,7 @@ canvas.controls.add(label);
                         </td>
                     </tr>
                     <tr>
-                        <td class="key" style="width: 150px;">
+                        <td class="key">
                             focusStyle
                         </td>
                         <td>

@@ -33,6 +33,8 @@
     onRequestPaint: null,
     onPositionChange: null,
     onSizeChange: null,
+    onWillPaint: null,
+    onDidPaint: null,
 
     // Interactive
     onCapture: null,
@@ -67,6 +69,8 @@
       this.onCapture = new EventHandler();
       this.onDrag = new EventHandler();
       this.onRelease = new EventHandler();
+      this.onWillPaint = new EventHandler();
+      this.onDidPaint = new EventHandler();
 
       // When component added
       this.controls.onAdd.add(function(component) {
@@ -156,10 +160,16 @@
       if (this.absLeft !== 0 || this.absTop !== 0) {
         context.translate(this.absLeft, this.absTop);
       }
+
+      // Trigger the will paint event
+      this.onWillPaint.trigger(context);
     },
 
     // Invoked in the callback of DidPaint
     restoreContext: function(context) {
+      // Trigger the did paint event
+      this.onDidPaint.trigger(context);
+
       // Restore the context
       context.restore();
 

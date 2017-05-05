@@ -49,6 +49,10 @@
         this.labelProps.text
       );
       this.label.setProp('fontSize', 20);
+      this.label.onWillPaint.add(function(context){
+        context.fillStyle = 'rgba(255, 0, 0, 0.5)';
+        context.fillRect(0, 0, this.width, this.height);
+      }.bind(this.label));
       canvas.controls.add(this.label);
 
       // Render the canvas into the wrapper
