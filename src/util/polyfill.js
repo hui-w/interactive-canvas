@@ -21,10 +21,21 @@ if (typeof window.$ !== 'function') {
   }
 }
 
+if (!String.prototype.isNumber) {
+  String.prototype.isNumber = function() {
+    var regExp = /^\d+(\.\d+)?$/;
+    return regExp.test(this);
+  };
+}
+
 if (!Element.prototype.createChild) {
-  Element.prototype.createChild = function(tag, param, innerHTML) {
+  Element.prototype.createChild = function(tag, param, innerHTML, addToFirst) {
     var element = document.createElement(tag);
-    this.appendChild(element);
+    if (addToFirst && this.hasChildNodes()) {
+      this.insertBefore(element, this.firstChild);
+    } else {
+      this.appendChild(element);
+    }
     if (param) {
       for (var key in param) {
         element.setAttribute(key, param[key]);
@@ -37,7 +48,6 @@ if (!Element.prototype.createChild) {
     return element;
   };
 }
-
 
 // Extend the canvas prototype
 var canvasPrototype = window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype;

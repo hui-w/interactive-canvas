@@ -88,3 +88,13 @@ td {
 .api-document p {
     text-align: justify;
 }
+
+.label-fields {}
+
+.label-fields .key {
+    margin: 0px 4px 0px 0px;
+}
+
+.label-fields .value {
+    margin: 0px 18px 0px 0px;
+}

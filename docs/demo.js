@@ -39,6 +39,9 @@
 
     // Render the palette
     var palette = new Palette('palette-wrapper');
+
+    // Render the exmple of Label
+    var labelSandbox = new LabelSandbox('label-sandbox-wrapper');
   });
 
 })();

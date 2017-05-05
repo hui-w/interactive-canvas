@@ -114,11 +114,11 @@
     },
 
     paint: function(context) {
-      this.onWillPaint.trigger(context);
-
       // Clear the canvas
       this.canvas.width = this.canvas.width;
       this.canvas.height = this.canvas.height;
+
+      this.onWillPaint.trigger(context);
 
       // Prepare to paint
       this.saveContext(context);
