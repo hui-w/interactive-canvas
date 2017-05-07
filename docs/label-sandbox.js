@@ -49,9 +49,13 @@
         this.labelProps.text
       );
       this.label.setProp('fontSize', 20);
-      this.label.onWillPaint.add(function(context){
+      this.label.onWillPaint.add(function(context) {
+        var boundary = this.getTextBoundary();
         context.fillStyle = 'rgba(255, 0, 0, 0.5)';
-        context.fillRect(0, 0, this.width, this.height);
+        context.fillRect(boundary.left - this.absLeft, boundary.top - this.absTop, boundary.width, boundary.height);
+        
+        //context.fillStyle = 'rgba(255, 0, 0, 0.5)';
+        //context.fillRect(0, 0, this.width, this.height);
       }.bind(this.label));
       canvas.controls.add(this.label);
 
@@ -62,10 +66,10 @@
     /* Apply the values to label properties */
     applyValue: function() {
       this.labelProps = {
-        left: $('txtLeft').value.isNumber() ? $('txtLeft').value : this.labelProps['left'],
-        top: $('txtTop').value.isNumber() ? $('txtTop').value : this.labelProps['top'],
-        width: $('txtWidth').value.isNumber() ? $('txtWidth').value : this.labelProps['width'],
-        height: $('txtHeight').value.isNumber() ? $('txtHeight').value : this.labelProps['height'],
+        left: $('txtLeft').value.isNumber() ? $('txtLeft').value - 0 : this.labelProps['left'],
+        top: $('txtTop').value.isNumber() ? $('txtTop').value - 0 : this.labelProps['top'],
+        width: $('txtWidth').value.isNumber() ? $('txtWidth').value - 0 : this.labelProps['width'],
+        height: $('txtHeight').value.isNumber() ? $('txtHeight').value - 0 : this.labelProps['height'],
         text: $('txtContent').value,
         horizontalAlign: $('selHAlign').options[$('selHAlign').selectedIndex].value,
         verticalAlign: $('selVAlign').options[$('selVAlign').selectedIndex].value

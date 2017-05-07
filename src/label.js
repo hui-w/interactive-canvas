@@ -85,16 +85,43 @@
 
       if (!this.getProp('isSizeFixed')) {
         // Set the caculated size
-        this.width = context.measureText(this.getProp('text')).width;
+        this.width = parseInt(context.measureText(this.getProp('text')).width);
         this.height = this.getProp('fontSize');
       }
       context.restore();
     },
 
+    // Get the boundary of renderred text
+    getTextBoundary: function() {
+      var left = this.left;
+      var top = this.top;
+      var width = this.width;
+      var height = this.height;
+
+      if (this.getProp('horizontalAlign') == 'center') {
+        left -= parseInt(this.width / 2);
+      } else if (this.getProp('horizontalAlign') == 'right') {
+        left -= this.width;
+      }
+
+      if (this.getProp('verticalAlign') == 'middle') {
+        top -= parseInt(this.height / 2);
+      } else if (this.getProp('verticalAlign') == 'bottom') {
+        top -= this.height;
+      }
+
+      return {
+        left: left,
+        top: top,
+        width: width,
+        height: height
+      }
+    },
+
     paint: function(context) {
       // Update the width and height
       this.updateSize(context);
-      
+
       // Prepare to paint
       this.saveContext(context);
 
