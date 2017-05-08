@@ -50,9 +50,9 @@
       );
       this.label.setProp('fontSize', 20);
       this.label.onWillPaint.add(function(context) {
-        var boundary = this.getTextBoundary();
+        var boundary = this.textBoundary;
         context.fillStyle = 'rgba(255, 0, 0, 0.5)';
-        context.fillRect(boundary.left - this.absLeft, boundary.top - this.absTop, boundary.width, boundary.height);
+        context.fillRect(boundary.left, boundary.top, boundary.width, boundary.height);
         
         //context.fillStyle = 'rgba(255, 0, 0, 0.5)';
         //context.fillRect(0, 0, this.width, this.height);

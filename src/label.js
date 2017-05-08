@@ -11,12 +11,21 @@
 (function() {
   var prototype = {
     onTextChange: null,
+    textBoundary: null,
 
     init: function(left, top, width, height, text, id) {
       this._super(left, top, width, height, id);
 
       // When text is changed
       this.onTextChange = new EventHandler();
+
+      // The text boundary with relative position
+      this.textBoundary = {
+        left: 0,
+        top: 0,
+        width: 0,
+        height: 0
+      }
 
       // Extend properties
       var newProperties = {
@@ -26,7 +35,7 @@
         text: text,
         horizontalAlign: 'left',
         verticalAlign: 'top',
-        isSizeFixed: false
+        alignMode: 'boundary' // 'basePoint' | 'boundary'
       };
       this.properties = Object.assign({}, this.properties, newProperties);
     },
@@ -47,7 +56,7 @@
           break;
         case 'text':
           if (this.updatePropValue('text', value)) {
-            this.updateSize();
+            this.updateBoundary();
             this.requestPaint();
             this.onTextChange.trigger();
           }
@@ -59,15 +68,15 @@
           break;
         case 'fontSize':
           if (this.updatePropValue('fontSize', value)) {
-            this.updateSize();
+            this.updateBoundary();
             this.requestPaint();
           }
           break;
       }
     },
 
-    // Set the font and get the size
-    updateSize: function(context) {
+    // To calculate the text boundary
+    updateBoundary: function(context) {
       if (!context) {
         // This method may be called ouside of paint without context
         context = this.getContext();
@@ -83,44 +92,32 @@
       // Set the font temporary for mesuring the size
       context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');
 
-      if (!this.getProp('isSizeFixed')) {
-        // Set the caculated size
-        this.width = parseInt(context.measureText(this.getProp('text')).width);
-        this.height = this.getProp('fontSize');
-      }
-      context.restore();
-    },
+      var textWidth = parseInt(context.measureText(this.getProp('text')).width);
+      var textHeight = this.getProp('fontSize');
 
-    // Get the boundary of renderred text
-    getTextBoundary: function() {
-      var left = this.left;
-      var top = this.top;
-      var width = this.width;
-      var height = this.height;
+      // Calculate size of the boundary
+      this.textBoundary.width = textWidth;
+      this.textBoundary.height = textHeight
 
+      // Calculate position of the boundary
       if (this.getProp('horizontalAlign') == 'center') {
-        left -= parseInt(this.width / 2);
+        this.textBoundary.left = - parseInt(textWidth / 2);
       } else if (this.getProp('horizontalAlign') == 'right') {
-        left -= this.width;
+        this.textBoundary.left = - textWidth;
       }
 
       if (this.getProp('verticalAlign') == 'middle') {
-        top -= parseInt(this.height / 2);
+        this.textBoundary.top = - parseInt(textHeight / 2);
       } else if (this.getProp('verticalAlign') == 'bottom') {
-        top -= this.height;
+        this.textBoundary.top = -textHeight;
       }
 
-      return {
-        left: left,
-        top: top,
-        width: width,
-        height: height
-      }
+      context.restore();
     },
 
     paint: function(context) {
       // Update the width and height
-      this.updateSize(context);
+      this.updateBoundary(context);
 
       // Prepare to paint
       this.saveContext(context);
