@@ -243,9 +243,8 @@ canvas.controls.add(panel);
                             var label = new Label(left, top, width, height, text, id);
                             <p><strong>left:</strong> Left of the control, which is relative to its parent.</p>
                             <p><strong>top:</strong> Top of the control, which is relative to its parent.</p>
-                            <p><strong>width:</strong> Width of the control. </p>
-                            <p><strong>height:</strong> Height of the control. </p>
-                            <p><em>(If "isSizeFixed" equals false, width and height will be calculated according to the text content, and values passed in will be ignored.)</em></p>
+                            <p><strong>width:</strong> Width of the container. </p>
+                            <p><strong>height:</strong> Height of the container. </p>
                             <p><strong>text:</strong> The text content to be renderred.</p>
                             <p><strong>id:</strong> Optional, and you may leave it empty.</p>
                         </td>
@@ -310,14 +309,14 @@ canvas.controls.add(panel);
                         </td>
                     </tr>
                     <tr>
+                        <th colspan="2">Methods</th>
+                    </tr>
+                    <tr>
                         <td class="key">
-                            isSizeFixed
+                            getTextBoundary()
                         </td>
                         <td>
-                            Default Value: false
-                            <p>
-                                If "isSizeFixed" equals false, width and height will be calculated according to the text content, and values passed in will be ignored.
-                            </p>
+                            Return a boundary infomation (left, top, width and height) of the text renderring.
                         </td>
                     </tr>
                     <tr>
