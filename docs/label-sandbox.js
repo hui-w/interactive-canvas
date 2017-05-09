@@ -50,12 +50,15 @@
       );
       this.label.setProp('fontSize', 20);
       this.label.onWillPaint.add(function(context) {
-        var boundary = this.textBoundary;
-        context.fillStyle = 'rgba(255, 0, 0, 0.5)';
-        context.fillRect(boundary.left, boundary.top, boundary.width, boundary.height);
+        // Fill the boundary background
+        var b = this.getTextBoundary();
+        context.fillStyle = 'rgba(255, 229, 0, 0.5)';
+        context.fillRect(b.left, b.top, b.width, b.height);
         
-        //context.fillStyle = 'rgba(255, 0, 0, 0.5)';
-        //context.fillRect(0, 0, this.width, this.height);
+        // Stroke the width and height
+        context.strokeStyle = '#f00';
+        context.lineWidth = 1;
+        context.strokeRect(0, 0, this.width, this.height);
       }.bind(this.label));
       canvas.controls.add(this.label);
 

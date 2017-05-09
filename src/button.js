@@ -40,6 +40,8 @@
       this.properties['strokeStyle'] = '#337AB7';
       this.properties['lineWidth'] = 1;
       this.properties['fontColor'] = '#337AB7';
+      this.properties['horizontalAlign'] = 'center';
+      this.properties['verticalAlign'] = 'middle';
 
       // Register the internal events
       this.onCapture.add(this.handleCapture.bind(this));
@@ -84,7 +86,9 @@
           context.fillStyle = this.getProp('fontColor');
         }
         context.font = this.getProp('fontSize') + "px " + this.getProp('fontFace');
-        context.fillTextEx(this.getProp('text'), this.width / 2, this.height / 2, 'center', 'middle');
+        context.textBaseline = 'top';
+        var b = this.getTextBoundary();
+        context.fillText(this.getProp('text'), b.left, b.top);
       }
 
       // Paint completed

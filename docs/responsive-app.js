@@ -42,9 +42,11 @@
       this.canvas.controls.add(this.toolbar);
 
       // Create a label and add into the canvas
-      this.label = new Label(10, 10, 0, 0, 'Label Text', 'label1')
-      this.label.setProp('isVisible', false);
+      this.label = new Label(10, 10, 0, 0, 'This is a label', 'label1')
+      // this.label.setProp('isVisible', false);
       this.label.setProp('fontSize', 20);
+      this.label.setProp('horizontalAlign', 'center');
+      this.label.setProp('verticalAlign', 'middle');
       this.canvas.controls.add(this.label);
 
       // When canvas size changed,

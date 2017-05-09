@@ -106,11 +106,10 @@ if (!canvasPrototype.roundRect) {
   }
 }
 
+/*
 if (!canvasPrototype.fillTextEx) {
-  /*
-   * horizontalAlign: left, center, right
-   * verticalAlign: top, middle, bottom
-   */
+  // horizontalAlign: left, center, right
+  // verticalAlign: top, middle, bottom
   canvasPrototype.fillTextEx = function(text, x, y, horizontalAlign, verticalAlign) {
     this.save();
     var textLeft = x;
@@ -127,6 +126,7 @@ if (!canvasPrototype.fillTextEx) {
     this.restore();
   }
 }
+*/
 
 // Production steps of ECMA-262, Edition 5, 15.4.4.18
 // Reference: http://es5.github.io/#x15.4.4.18
