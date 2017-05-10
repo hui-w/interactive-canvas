@@ -87,7 +87,7 @@
         }
         context.font = this.getProp('fontSize') + "px " + this.getProp('fontFace');
         context.textBaseline = 'top';
-        var b = this.getTextBoundary();
+        var b = this.getTextObject();
         context.fillText(this.getProp('text'), b.left, b.top);
       }
 

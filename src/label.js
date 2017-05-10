@@ -11,7 +11,7 @@
 (function() {
   var prototype = {
     onTextChange: null,
-    textBoundary: null,
+    textObject: null,
 
     init: function(left, top, width, height, text, id) {
       this._super(left, top, width, height, id);
@@ -20,7 +20,7 @@
       this.onTextChange = new EventHandler();
 
       // The text boundary with relative position
-      this.textBoundary = null;
+      this.textObject = null;
 
       // Extend properties
       var newProperties = {
@@ -36,7 +36,7 @@
 
       // Register the internal events
       this.onSizeChange.add(function(width, height) {
-        this.updateTextBoundary();
+        this.updateTextObject();
       }.bind(this));
     },
 
@@ -46,19 +46,19 @@
       switch (key) {
         case 'horizontalAlign':
           if (this.updatePropValue('horizontalAlign', value)) {
-            this.updateTextBoundary();
+            this.updateTextObject();
             this.requestPaint();
           }
           break;
         case 'verticalAlign':
           if (this.updatePropValue('verticalAlign', value)) {
-            this.updateTextBoundary();
+            this.updateTextObject();
             this.requestPaint();
           }
           break;
         case 'text':
           if (this.updatePropValue('text', value)) {
-            this.updateTextBoundary();
+            this.updateTextObject();
             this.requestPaint();
             this.onTextChange.trigger();
           }
@@ -70,22 +70,22 @@
           break;
         case 'fontSize':
           if (this.updatePropValue('fontSize', value)) {
-            this.updateTextBoundary();
+            this.updateTextObject();
             this.requestPaint();
           }
       }
     },
 
-    getTextBoundary: function() {
-      if (this.textBoundary == null) {
-        this.updateTextBoundary();
+    getTextObject: function() {
+      if (this.textObject == null) {
+        this.updateTextObject();
       }
 
-      return this.textBoundary;
+      return this.textObject;
     },
 
     // To calculate the text boundary
-    updateTextBoundary: function(context) {
+    updateTextObject: function(context) {
       if (!context) {
         // This method may be called ouside of paint without context
         context = this.getContext();
@@ -96,7 +96,9 @@
         }
       }
 
-      this.isBoundaryUpdated = true;
+      // Parsing lines
+      var lines = this.getProp('text').split(/\\n/);
+      // console.log(lines);
 
       context.save();
 
@@ -122,7 +124,7 @@
         textTop = this.height - textHeight;
       }
 
-      this.textBoundary = {
+      this.textObject = {
         left: textLeft,
         top: textTop,
         width: textWidth,
@@ -143,7 +145,7 @@
       context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');
       context.fillStyle = this.getProp('fontColor');
       context.textBaseline = 'top';
-      var b = this.getTextBoundary();
+      var b = this.getTextObject();
       context.fillText(this.getProp('text'), b.left, b.top);
 
       /*

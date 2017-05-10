@@ -53,7 +53,7 @@
       this.label.setProp('verticalAlign', this.labelProps.verticalAlign);
       this.label.onWillPaint.add(function(context) {
         // Fill the boundary background
-        var b = this.getTextBoundary();
+        var b = this.getTextObject();
         context.fillStyle = 'rgba(255, 229, 0, 0.5)';
         context.fillRect(b.left, b.top, b.width, b.height);
 
