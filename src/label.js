@@ -33,6 +33,11 @@
         alignMode: 'boundary' // 'basePoint' | 'boundary'
       };
       this.properties = Object.assign({}, this.properties, newProperties);
+
+      // Register the internal events
+      this.onSizeChange.add(function(width, height) {
+        this.updateTextBoundary();
+      }.bind(this));
     },
 
     setProp: function(key, value) {
@@ -108,13 +113,13 @@
       if (this.getProp('horizontalAlign') == 'center') {
         textLeft = parseInt(this.width / 2 - textWidth / 2);
       } else if (this.getProp('horizontalAlign') == 'right') {
-        textLeft = -textWidth;
+        textLeft = this.width - textWidth;
       }
 
       if (this.getProp('verticalAlign') == 'middle') {
         textTop = parseInt(this.height / 2 - textHeight / 2);
       } else if (this.getProp('verticalAlign') == 'bottom') {
-        textTop = -textHeight;
+        textTop = this.height - textHeight;
       }
 
       this.textBoundary = {

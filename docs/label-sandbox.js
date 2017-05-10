@@ -14,11 +14,11 @@
     this.labelProps = {
       left: 250,
       top: 100,
-      width: 0,
-      height: 0,
+      width: 220,
+      height: 40,
       text: 'This is the sample text',
-      horizontalAlign: 'left',
-      verticalAlign: 'top'
+      horizontalAlign: 'center',
+      verticalAlign: 'middle'
     };
 
     this.renderCanvas();
@@ -49,12 +49,14 @@
         this.labelProps.text
       );
       this.label.setProp('fontSize', 20);
+      this.label.setProp('horizontalAlign', this.labelProps.horizontalAlign);
+      this.label.setProp('verticalAlign', this.labelProps.verticalAlign);
       this.label.onWillPaint.add(function(context) {
         // Fill the boundary background
         var b = this.getTextBoundary();
         context.fillStyle = 'rgba(255, 229, 0, 0.5)';
         context.fillRect(b.left, b.top, b.width, b.height);
-        
+
         // Stroke the width and height
         context.strokeStyle = '#f00';
         context.lineWidth = 1;
