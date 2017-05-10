@@ -96,14 +96,20 @@
         }
       }
 
-      // Parsing lines
-      var lines = this.getProp('text').split(/\\n/);
-      // console.log(lines);
-
       context.save();
 
       // Set the font temporary for mesuring the size
       context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');
+
+      // Parsing lines
+      var lines = [];
+      this.getProp('text').split(/\n/).forEach(function(content) {
+        lines.push({
+          width: context.measureText(content).width,
+          height: this.getProp('fontSize'),
+          content: content
+        });
+      }.bind(this));
 
       // Calculate size of the boundary
       var textWidth = parseInt(context.measureText(this.getProp('text')).width);
@@ -128,7 +134,8 @@
         left: textLeft,
         top: textTop,
         width: textWidth,
-        height: textHeight
+        height: textHeight,
+        lines: lines
       }
 
       context.restore();
