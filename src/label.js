@@ -101,19 +101,24 @@
       // Set the font temporary for mesuring the size
       context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');
 
+      var textWidth = 0,
+        textHeight = 0;
       // Parsing lines
       var lines = [];
       this.getProp('text').split(/\n/).forEach(function(content) {
+        var lineWidth = context.measureText(content).width;
         lines.push({
-          width: context.measureText(content).width,
+          width: lineWidth,
           height: this.getProp('fontSize'),
           content: content
         });
-      }.bind(this));
 
-      // Calculate size of the boundary
-      var textWidth = parseInt(context.measureText(this.getProp('text')).width);
-      var textHeight = this.getProp('fontSize');
+        // Update the text width and height
+        if (lineWidth > textWidth) {
+          textWidth = lineWidth;
+        }
+        textHeight += this.getProp('fontSize');
+      }.bind(this));
 
       // Calculate position of the boundary
       var textLeft = 0,
