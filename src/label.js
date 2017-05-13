@@ -103,7 +103,8 @@
 
       var textWidth = 0,
         textHeight = 0;
-      // Parsing lines
+
+      // Parsing the string into lines with width and height of each line
       var lines = [];
       this.getProp('text').split(/\n/).forEach(function(content) {
         var lineWidth = context.measureText(content).width;
@@ -135,6 +136,19 @@
         textTop = this.height - textHeight;
       }
 
+      // Calculate the left and top of each line
+      var lineTop = textTop;
+      lines.forEach(function(line, index) {
+        line.top = textTop + this.getProp('fontSize') * index;
+        if (this.getProp('horizontalAlign') == 'center') {
+          line.left = textLeft + parseInt(textWidth / 2 - line.width / 2);
+        } else if (this.getProp('horizontalAlign') == 'right') {
+          line.left = textLeft + textWidth - line.width;
+        } else {
+          line.left = textLeft;
+        }
+      }.bind(this));
+
       this.textObject = {
         left: textLeft,
         top: textTop,
@@ -157,8 +171,11 @@
       context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');
       context.fillStyle = this.getProp('fontColor');
       context.textBaseline = 'top';
-      var b = this.getTextObject();
-      context.fillText(this.getProp('text'), b.left, b.top);
+      var t = this.getTextObject();
+      t.lines.forEach(function(line) {
+        context.fillText(line.content, line.left, line.top);
+      });
+      // context.fillText(this.getProp('text'), b.left, b.top);
 
       /*
       function wrapText(context, text, x, y, maxWidth, lineHeight) {

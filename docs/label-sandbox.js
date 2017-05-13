@@ -15,8 +15,8 @@
       left: 250,
       top: 100,
       width: 220,
-      height: 40,
-      text: 'This is the sample text',
+      height: 60,
+      text: 'This is the sample text\nNew Line',
       horizontalAlign: 'center',
       verticalAlign: 'middle'
     };
