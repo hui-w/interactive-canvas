@@ -16,7 +16,7 @@
       top: 100,
       width: 240,
       height: 60,
-      text: 'This is the sample text \nof two lines',
+      text: 'This is the sample text\nof two lines',
       horizontalAlign: 'center',
       verticalAlign: 'middle'
     };

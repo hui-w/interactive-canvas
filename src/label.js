@@ -86,8 +86,8 @@
 
     // To calculate the text boundary
     updateTextObject: function(context) {
+      // This method may be called ouside of paint without context
       if (!context) {
-        // This method may be called ouside of paint without context
         context = this.getContext();
 
         if (!context) {
@@ -99,61 +99,62 @@
       context.save();
 
       // Set the font temporary for mesuring the size
-      context.font = this.getProp('fontSize') + 'px ' + this.getProp('fontFace');
+      var fontSize = this.getProp('fontSize');
+      context.font = fontSize + 'px ' + this.getProp('fontFace');
 
-      var textWidth = 0,
-        textHeight = 0;
+      var maxLineWidth = 0,
+        sumLineHeight = 0;
 
       // Parsing the string into lines with width and height of each line
       var lines = [];
-      this.getProp('text').split(/\n/).forEach(function(content) {
-        var lineWidth = context.measureText(content).width;
+      this.getProp('text').split(/\n/).forEach(function(lineContent) {
+        var lineWidth = context.measureText(lineContent).width;
+        var lineHeight = fontSize;
         lines.push({
           width: lineWidth,
-          height: this.getProp('fontSize'),
-          content: content
+          height: lineHeight,
+          content: lineContent
         });
 
         // Update the text width and height
-        if (lineWidth > textWidth) {
-          textWidth = lineWidth;
+        if (lineWidth > maxLineWidth) {
+          maxLineWidth = lineWidth;
         }
-        textHeight += this.getProp('fontSize');
+        sumLineHeight += lineHeight;
       }.bind(this));
 
       // Calculate position of the boundary
-      var textLeft = 0,
-        textTop = 0;
+      var paragraphLeft = 0,
+        paragraphTop = 0;
       if (this.getProp('horizontalAlign') == 'center') {
-        textLeft = parseInt(this.width / 2 - textWidth / 2);
+        paragraphLeft = parseInt((this.width - maxLineWidth) / 2);
       } else if (this.getProp('horizontalAlign') == 'right') {
-        textLeft = this.width - textWidth;
+        paragraphLeft = this.width - maxLineWidth;
       }
 
       if (this.getProp('verticalAlign') == 'middle') {
-        textTop = parseInt(this.height / 2 - textHeight / 2);
+        paragraphTop = parseInt((this.height - sumLineHeight) / 2);
       } else if (this.getProp('verticalAlign') == 'bottom') {
-        textTop = this.height - textHeight;
+        paragraphTop = this.height - sumLineHeight;
       }
 
       // Calculate the left and top of each line
-      var lineTop = textTop;
       lines.forEach(function(line, index) {
-        line.top = textTop + this.getProp('fontSize') * index;
+        line.top = paragraphTop + fontSize * index;
         if (this.getProp('horizontalAlign') == 'center') {
-          line.left = textLeft + parseInt(textWidth / 2 - line.width / 2);
+          line.left = paragraphLeft + parseInt((maxLineWidth - line.width) / 2);
         } else if (this.getProp('horizontalAlign') == 'right') {
-          line.left = textLeft + textWidth - line.width;
+          line.left = paragraphLeft + maxLineWidth - line.width;
         } else {
-          line.left = textLeft;
+          line.left = paragraphLeft;
         }
       }.bind(this));
 
       this.textObject = {
-        left: textLeft,
-        top: textTop,
-        width: textWidth,
-        height: textHeight,
+        left: paragraphLeft,
+        top: paragraphTop,
+        width: maxLineWidth,
+        height: sumLineHeight,
         lines: lines
       }
 
