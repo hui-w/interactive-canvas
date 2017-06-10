@@ -47,7 +47,7 @@
       this.canvas.onDidPaint.add(function(context) {
         context.save();
         context.textBaseline = 'top';
-        context.fillText("Canvas Painted at " + (new Date()).valueOf(), 4, 4);
+        context.fillText('Canvas Painted at ' + (new Date()).valueOf(), 4, 4);
         context.restore();
         console.log('Canvas Did Paint');
       }.bind(this));
@@ -55,7 +55,7 @@
 
     // ----- Prepare the label into canvas
     prepareLabel: function() {
-      this.label = new Label(80, 140, 0, 0, "Try to click the colorful rectangles");
+      this.label = new Label(80, 140, 0, 0, 'Try to click the colorful rectangles');
       this.label.setProp('fillStyle', '#5FBA7D');
       this.label.setProp('lineWidth', 2);
       this.label.setProp('strokeStyle', '#5FBA7D');

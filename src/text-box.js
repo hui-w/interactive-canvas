@@ -3,7 +3,7 @@
  * @repo https://github.com/hui-w/interactive-canvas
  * @licence MIT
  *
- * TextBox (WIP)
+ * [Class: TextBox] (WIP)
  */
 
 'use strict';

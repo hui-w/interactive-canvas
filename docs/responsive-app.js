@@ -4,7 +4,7 @@
  * @licence MIT
 
  Tip:
-  Set HTML body style for full screen app:
+  To create a fullscreen app, do set the style of HTML body as:
   <body style="overflow: hidden">
  */
 

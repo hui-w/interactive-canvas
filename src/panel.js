@@ -3,7 +3,7 @@
  * @repo https://github.com/hui-w/interactive-canvas
  * @licence MIT
  *
- * Panel
+ * [Class: Panel]
  */
 
 'use strict';

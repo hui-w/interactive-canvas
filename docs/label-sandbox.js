@@ -104,7 +104,7 @@
         style: 'width: 50px;',
         class: 'value',
         value: this.labelProps['left']
-      }).addEventListener("blur", function() {
+      }).addEventListener('blur', function() {
         this.applyValue();
       }.bind(this), false);
 
@@ -119,7 +119,7 @@
         style: 'width: 50px;',
         class: 'value',
         value: this.labelProps['top']
-      }).addEventListener("blur", function() {
+      }).addEventListener('blur', function() {
         this.applyValue();
       }.bind(this), false);
 
@@ -134,7 +134,7 @@
         style: 'width: 50px;',
         class: 'value',
         value: this.labelProps['width']
-      }).addEventListener("blur", function() {
+      }).addEventListener('blur', function() {
         this.applyValue();
       }.bind(this), false);
 
@@ -149,7 +149,7 @@
         style: 'width: 50px;',
         class: 'value',
         value: this.labelProps['height']
-      }).addEventListener("blur", function() {
+      }).addEventListener('blur', function() {
         this.applyValue();
       }.bind(this), false);
 
@@ -163,7 +163,7 @@
       p2.createChild('textarea', {
         style: 'width: 500px; height: 100px;',
         id: 'txtContent'
-      }, this.labelProps['text']).addEventListener("blur", function() {
+      }, this.labelProps['text']).addEventListener('blur', function() {
         this.applyValue();
       }.bind(this), false);
 
@@ -181,7 +181,7 @@
         id: 'selHAlign',
         class: 'value'
       });
-      selH.addEventListener("change", function() {
+      selH.addEventListener('change', function() {
         this.applyValue();
       }.bind(this), false);
       selH.createChild('option',
@@ -203,7 +203,7 @@
         id: 'selVAlign',
         class: 'value'
       });
-      selV.addEventListener("change", function() {
+      selV.addEventListener('change', function() {
         this.applyValue();
       }.bind(this), false);
       selV.createChild('option',

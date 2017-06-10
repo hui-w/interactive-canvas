@@ -3,8 +3,8 @@
  * @repo https://github.com/hui-w/interactive-canvas
  * @licence MIT
  *
- * Component
- * Does't implement "Paint()" method
+ * [Class: Component]
+ * Base class of components which does't implement "Paint()" method
  */
 
 'use strict';
