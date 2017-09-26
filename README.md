@@ -1,5 +1,5 @@
 # Interactive Canvas
-Javascript library for component-based HTML5 canvas
+Javascript library of component-based HTML5 canvas
 
 ## A Brief Look
 
